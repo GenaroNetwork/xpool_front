@@ -1,0 +1,10 @@
+.brand {
+  float: left;
+}
+.brand >a >h1 {
+  color: #FDAB01;
+}
+
+.right-component {
+  float: right;
+}

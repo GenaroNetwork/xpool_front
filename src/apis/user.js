@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { HOST } from '../config';
+import Config from '../config';
 
 function getCode(email) {
-  return axios.post(`${HOST}/user/getverificationcode`, { email })
+  return axios.post(`${Config.HOST}/user/getverificationcode`, { email })
 }
 
 function register(email, password, code) {
-  return axios.post(`${HOST}/user/createuser`, {
+  return axios.post(`${Config.HOST}/user/createuser`, {
     email,
     password,
     code
@@ -14,20 +14,20 @@ function register(email, password, code) {
 }
 
 function login(email, password) {
-  return axios.post(`${HOST}/user/login`, {
+  return axios.post(`${Config.HOST}/user/login`, {
     email,
     password
   })
 }
 
 function getUserInfo(token) {
-  return axios.post(`${HOST}/user/getuserbytoken`, {
+  return axios.post(`${Config.HOST}/user/getuserbytoken`, {
     token
   })
 }
 
 function forgetPassword(email, password, code) {
-  return axios.post(`${HOST}/user/forgetpassword`, {
+  return axios.post(`${Config.HOST}/user/forgetpassword`, {
     email,
     password,
     code
@@ -35,14 +35,14 @@ function forgetPassword(email, password, code) {
 }
 
 function resetPassword(token, oldPassword, newPassword) {
-  return axios.post(`${HOST}/user/resetpassword`, {
+  return axios.post(`${Config.HOST}/user/resetpassword`, {
     token,
     password: oldPassword,
     newPassword
   })
 }
 
-export default {
+export {
   getCode,
   register,
   login,
