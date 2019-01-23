@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { Form, Input, message, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, } from 'antd';
 import './Register.css';
 import * as Api from '../apis';
 class Register extends Component {
@@ -12,23 +13,67 @@ class Register extends Component {
     }
   }
 
+  delayRedirect(ms) {
+    const that = this;
+    setTimeout(function() {
+      that.props.history.push('/login')
+    }, ms)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        Api.register(values.email, values.password, values.code).then(res => {
+          const data = res.data;
+          switch (data.code) {
+            case 200:
+              message.success('注册用户成功');
+              this.delayRedirect(2000);
+              break;
+            case 10000:
+              message.success('email格式错误');
+              break;
+            case 10002:
+              message.success('email已存在');
+              break;
+            case 10004:
+              message.success('password长度应大于5');
+              break;
+            default:
+              message.success('注册失败');
+              break;
+          }
+        })
       }
     });
   }
 
   getCode() {
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-    if (this.state.email) {
-      Api.getCode(this.state.email);
+    const data = this.props.form.getFieldsValue();
+    if (data.email) {
+      Api.getCode(data.email).then((res) => {
+        console.log(res.data.code)
+        switch (res.data.code) {
+          case 200:
+            message.info('邮件发送成功');
+            break;
+          case 10008:
+            message.error('email 格式错误');
+            break;
+          case 10010:
+          case 10012:
+            message.error('邮件发送失败');
+            break;          
+          default:
+             message.error('邮件发送失败');
+            break;
+        }
+      }).catch(err => {
+        message.error('邮件发送失败');
+      });
+    }else {
+      message.error('请输入邮箱');
     }
   }
 
@@ -81,7 +126,7 @@ class Register extends Component {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              登录
+              注册
             </Button>
           </Form.Item>
         </Form>
@@ -90,4 +135,4 @@ class Register extends Component {
   }
 }
 
-export default Form.create({name: 'xpool-user-register'})(Register);
+export default withRouter(Form.create({name: 'xpool-user-register'})(Register));

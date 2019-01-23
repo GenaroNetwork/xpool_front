@@ -2,10 +2,10 @@
   max-width: 400px;
   margin: 0 auto;
   margin-top: 5rem;
+  padding: 20px;
+  background: #FFFFFF;
 }
-.xpool-user-register .xpool-user-register-form {
-  min-height: 500px;
-}
+
 .xpool-user-register .login-form-button {
   width: 100%;
 }

@@ -29,7 +29,7 @@ class Main extends Component {
     return (
       <div>
         <Layout>
-          <Sider>
+          <Sider theme="light">
               <Menu
               style={{ minHeight: 600 }}
               defaultSelectedKeys={['1']}
