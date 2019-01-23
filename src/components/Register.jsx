@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Form, Input, message, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, } from 'antd';
+import { Form, Input, message, Icon, Row, Col, Button, } from 'antd';
 import './Register.css';
 import * as Api from '../apis';
 class Register extends Component {
