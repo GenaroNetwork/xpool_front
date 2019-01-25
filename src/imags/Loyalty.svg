@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="67px" height="74px" viewBox="0 0 67 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>Loyalty</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-533.000000, -297.000000)">
+            <g id="Loyalty" transform="translate(535.000000, 299.000000)">
+                <path d="M55.5244,69.8064 L7.8284,69.8064 C3.7064,69.8064 0.3334,66.4334 0.3334,62.3114 L0.3334,31.1184 C0.3334,26.9954 3.7064,23.6224 7.8284,23.6224 L55.5244,23.6224 C59.6464,23.6224 63.0184,26.9954 63.0184,31.1184 L63.0184,62.3114 C63.0184,66.4334 59.6464,69.8064 55.5244,69.8064" id="Fill-157" fill="#89BFB2"></path>
+                <path d="M55.5244,69.8064 L7.8284,69.8064 C3.7064,69.8064 0.3334,66.4334 0.3334,62.3114 L0.3334,31.1184 C0.3334,26.9954 3.7064,23.6224 7.8284,23.6224 L55.5244,23.6224 C59.6464,23.6224 63.0184,26.9954 63.0184,31.1184 L63.0184,62.3114 C63.0184,66.4334 59.6464,69.8064 55.5244,69.8064 Z" id="Stroke-159" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M49.2744,46.7146 C49.2744,46.4366 49.5004,46.2116 49.7774,46.2116 C50.0554,46.2116 50.2814,46.4366 50.2814,46.7146 C50.2814,46.9926 50.0554,47.2176 49.7774,47.2176 C49.5004,47.2176 49.2744,46.9926 49.2744,46.7146 Z" id="Stroke-161" stroke="#000000" stroke-width="3"></path>
+                <path d="M48.9766,41.2605 L62.0066,41.2605 C62.2046,41.2605 62.3646,41.4505 62.3646,41.6865 L62.3646,51.7425 C62.3646,51.9785 62.2046,52.1685 62.0066,52.1685 L47.6226,52.1685 C45.3806,52.1685 43.5636,50.0005 43.5636,47.3265 L43.5636,46.1025 C43.5636,43.4285 45.3806,41.2605 47.6226,41.2605 L48.9766,41.2605" id="Stroke-163" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <g id="Group-168" transform="translate(3.000000, 0.000000)">
+                    <polyline id="Fill-165" fill="#F66B68" points="28.9922 22.9724 18.2652 0.3084 0.7932 8.6134 7.7132 22.6264"></polyline>
+                    <polyline id="Stroke-167" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="28.9922 22.9724 18.2652 0.3084 0.7932 8.6134 7.7132 22.6264"></polyline>
+                </g>
+                <path d="M55.8604,7.0291 C55.8404,7.0721 55.8324,7.1171 55.8104,7.1591 C54.6784,9.3971 51.5314,10.9561 49.2924,9.8241 C47.0794,8.7051 46.6004,5.3621 47.6744,3.1381 L42.6314,0.7411 L31.9054,23.4051 L52.8394,23.4051 L60.1044,9.0461 L55.8604,7.0291 Z" id="Fill-169" fill="#F3CC65"></path>
+                <path d="M55.8604,7.0291 C55.8404,7.0721 55.8324,7.1171 55.8104,7.1591 C54.6784,9.3971 51.5314,10.9561 49.2924,9.8241 C47.0794,8.7051 46.6004,5.3621 47.6744,3.1381 L42.6314,0.7411 L31.9054,23.4051 L52.8394,23.4051 L60.1044,9.0461 L55.8604,7.0291 Z" id="Stroke-171" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M23.5303,48.0681 L31.4883,40.1101" id="Stroke-173" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M29.291,49.2322 L32.652,45.8712" id="Stroke-175" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

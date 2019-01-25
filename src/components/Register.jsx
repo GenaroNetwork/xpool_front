@@ -20,28 +20,20 @@ class Register extends Component {
     }, ms)
   }
 
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        Api.register(values.email, values.password, values.code).then(res => {
+        Api.register(values.email, values.password, values.code, values.address).then(res => {
           const data = res.data;
           switch (data.code) {
             case 200:
               message.success('注册用户成功');
               this.delayRedirect(2000);
               break;
-            case 10000:
-              message.success('email格式错误');
-              break;
-            case 10002:
-              message.success('email已存在');
-              break;
-            case 10004:
-              message.success('password长度应大于5');
-              break;
             default:
-              message.success('注册失败');
+              message.success(res.data.data);
               break;
           }
         })
@@ -58,16 +50,9 @@ class Register extends Component {
           case 200:
             message.info('邮件发送成功');
             break;
-          case 10008:
-            message.error('email 格式错误');
-            break;
-          case 10010:
-          case 10012:
-            message.error('邮件发送失败');
-            break;          
           default:
-             message.error('邮件发送失败');
-            break;
+            message.error(res.data.data);
+            break;          
         }
       }).catch(err => {
         message.error('邮件发送失败');
@@ -106,7 +91,7 @@ class Register extends Component {
               getFieldDecorator('password', {
                 rules: [{ required: true, message: '请输入你的密码!' }]
               })(
-                <Input prefix={<Icon type="safety" style={{color: 'rgba(0,0,0,.25)'}}/>} placeholder="Password"/>
+                <Input prefix={<Icon type="safety" style={{color: 'rgba(0,0,0,.25)'}}/>} placeholder="Password" type="password"/>
               )
             }
           </Form.Item>

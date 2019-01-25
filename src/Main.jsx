@@ -8,6 +8,36 @@ import Miner from './components/Miner';
 const { Sider, Content, Footer } = Layout;
 
 class Main extends Component {
+  constructor(prpos) {
+    super(prpos);
+    this.state = {
+      defaultSelectedKeys: ['1']
+    };
+  }
+
+  componentWillMount() {
+    console.log(this.props);
+    switch (this.props.location.pathname) {
+      case '/miner':
+        this.setState({
+          defaultSelectedKeys: ['3']
+        })
+        break;
+      case '/assets':
+        this.setState({
+          defaultSelectedKeys: ['1']
+        })
+        break;
+      case '/cash':
+        this.setState({
+          defaultSelectedKeys: ['2']
+        })
+        break;
+      default:
+        break;
+    }
+  }
+
   handlerMenuClick({ key }) {
     switch (key) {
       case "1":
@@ -32,7 +62,7 @@ class Main extends Component {
           <Sider theme="light">
               <Menu
               style={{ minHeight: 600 }}
-              defaultSelectedKeys={['1']}
+              defaultSelectedKeys={this.state.defaultSelectedKeys}
               mode="inline"
               onClick={this.handlerMenuClick.bind(this)}
             >
@@ -53,6 +83,7 @@ class Main extends Component {
           <Layout>
             <Content>
               <Switch>
+                <Route path="/" exact component={Assets} />
                 <Route path="/assets" component={Assets} />
                 <Route path="/cash" component={Cash} />
                 <Route path="/miner" component={Miner} />

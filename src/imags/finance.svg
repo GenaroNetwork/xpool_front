@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="93px" height="46px" viewBox="0 0 93 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>finance</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-520.000000, -465.000000)">
+            <g id="finance" transform="translate(522.000000, 467.000000)">
+                <polygon id="Fill-177" fill="#9ACE90" points="0.176 42.476 89.176 42.476 89.176 0.267 0.176 0.267"></polygon>
+                <polygon id="Stroke-179" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="0.176 42.476 89.176 42.476 89.176 0.267 0.176 0.267"></polygon>
+                <path d="M75.5225,5.7136 C75.5225,5.6376 75.5425,5.5676 75.5445,5.4926 L14.1945,5.4926 C14.1975,5.5676 14.2165,5.6376 14.2165,5.7136 C14.2165,9.2066 11.3835,12.0386 7.8905,12.0386 C7.7885,12.0386 7.6915,12.0136 7.5895,12.0086 L7.5895,30.7706 C7.6605,30.7686 7.7255,30.7496 7.7965,30.7496 C11.2915,30.7496 14.1235,33.5816 14.1235,37.0746 C14.1235,37.1356 14.1065,37.1916 14.1055,37.2516 L75.4475,37.2516 C75.4455,37.1916 75.4285,37.1356 75.4285,37.0746 C75.4285,33.5816 78.2605,30.7496 81.7545,30.7496 C81.7575,30.7496 81.7595,30.7506 81.7615,30.7506 L81.7615,12.0296 C78.3095,11.9836 75.5225,9.1776 75.5225,5.7136 Z" id="Stroke-180" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M28.6924,21.4031 L11.9324,21.4031" id="Stroke-181" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M77.4189,21.4031 L60.6599,21.4031" id="Stroke-182" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M53.0098,21.3718 C53.0098,25.9748 49.2788,29.7058 44.6758,29.7058 C40.0728,29.7058 36.3428,25.9748 36.3428,21.3718 C36.3428,16.7688 40.0728,13.0388 44.6758,13.0388 C49.2788,13.0388 53.0098,16.7688 53.0098,21.3718" id="Fill-183" fill="#8FBA86"></path>
+                <path d="M53.0098,21.3718 C53.0098,25.9748 49.2788,29.7058 44.6758,29.7058 C40.0728,29.7058 36.3428,25.9748 36.3428,21.3718 C36.3428,16.7688 40.0728,13.0388 44.6758,13.0388 C49.2788,13.0388 53.0098,16.7688 53.0098,21.3718 Z" id="Stroke-184" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

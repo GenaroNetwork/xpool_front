@@ -6,11 +6,12 @@ function getCode(email) {
   return axios.post(`${Config.HOST}/user/getverificationcode`, qs.stringify({email}))
 }
 
-function register(email, password, code) {
+function register(email, password, code, address) {
   return axios.post(`${Config.HOST}/user/createuser`, qs.stringify({
     email,
     password,
-    code
+    code,
+    address
   }))
 }
 

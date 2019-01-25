@@ -1,0 +1,17 @@
+.header > h2 > span {
+  color: #FDAB01;
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.ant-card{
+  border-radius: 10px !important;
+}
+
+.header {
+  display: flex;
+}
+.header button {
+  margin-left: 20px;
+}
+
