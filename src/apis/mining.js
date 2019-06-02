@@ -2,14 +2,23 @@ import axios from 'axios';
 import Config from '../config';
 import qs from 'qs';
 
-function loanMinning(token, password, value) {
+function loanMining(token, value, password) {
   return axios.post(`${Config.HOST}/mining/loanmining`, qs.stringify({
     token,
-    password,
-    value
+    value,
+    password
   }))
 }
 
-export default {
-  loanMinning
+function getLoanMiningList(token, page=1, pageSize=10) {
+  return axios.post(`${Config.HOST}/mining/getloanmininglist`, qs.stringify({
+    token,
+    page,
+    pageSize
+  }))
+}
+
+export  {
+  loanMining,
+  getLoanMiningList
 }

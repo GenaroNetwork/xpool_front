@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Icon, Modal, Button, message } from 'antd';
 import * as Api from '../apis';
 
-class WithdrawDepositForm extends React.Component {
+class EndMineForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,6 @@ class WithdrawDepositForm extends React.Component {
                 confirmLoading: false,
               });
               this.resetForm();
-              this.props.onComplete();
               message.info('申请提取保证金成功')
               break;
             default:
@@ -108,4 +107,4 @@ class WithdrawDepositForm extends React.Component {
   }
 }
 
-export default Form.create({ name: 'withdraw_deposit_form' })(WithdrawDepositForm);
+export default Form.create({ name: 'mine_form' })(EndMineForm);
