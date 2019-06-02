@@ -5,12 +5,12 @@ import StartMineForm from './StartMineForm';
 import * as Api from '../apis';
 
 
-class Cash extends React.Component {
+class Miner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       deposit: 0,
-      getdepositlist: {
+      getLoanMiningList: {
         page: 1,
         pageSize: 10,
         data: [],
@@ -27,7 +27,7 @@ class Cash extends React.Component {
   }
 
   componentWillMount() {
-    this.getDepositlist(this.state.getdepositlist.page, this.state.getdepositlist.pageSize);
+    this.getLoanMiningList(this.state.getLoanMiningList.page, this.state.getLoanMiningList.pageSize);
     this.getextractDepositlist(this.state.getextractdepositlist.page, this.state.getextractdepositlist.pageSize);
     this.getDepositBalance()
   }
@@ -35,19 +35,20 @@ class Cash extends React.Component {
   componentWillUpdate() {
   }
 
-  getDepositlist = (page, pageSize) => {
+  getLoanMiningList = (page, pageSize) => {
     const token = localStorage.getItem('xpool-token');
-    Api.getDepositList(token, page, pageSize).then(res => {
+    Api.getLoanMiningList(token, page, pageSize).then(res => {
       if (res.data.code) {
         this.setState(preState => ({
-          getdepositlist: Object.assign({}, preState.getdepositlist, {
+          getLoanMiningList: Object.assign({}, preState.getLoanMiningList, {
             page: res.data.data.page,
             pageSize: res.data.data.pageSize,
             total: res.data.data.total,
-            data: res.data.data.depositList
+            data: res.data.data.loan_mining_list
           })
         }))
       }
+      this.getDepositBalance();
     })
   }
 
@@ -79,8 +80,8 @@ class Cash extends React.Component {
     })
   }
 
-  onHandleChangeDepositlistTable = (page, pageSize) => {
-    this.getDepositlist(page, pageSize);
+  onHandleChangeLoanMiningListTable = (page, pageSize) => {
+    this.getLoanMiningList(page, pageSize);
   }
 
   onHandleChangeExtractDepositlistTable = (page, pageSize) => {
@@ -89,15 +90,15 @@ class Cash extends React.Component {
 
   render() {
 
-    const footer_getdepositlist = () => (
-        <Pagination total={this.state.getdepositlist.total} current={this.state.getdepositlist.page} pageSize={this.state.getdepositlist.pageSize} hideOnSinglePage={true} onChange={this.onHandleChangeDepositlistTable}/>
+    const footer_loanMiningList = () => (
+        <Pagination total={this.state.getLoanMiningList.total} current={this.state.getLoanMiningList.page} pageSize={this.state.getLoanMiningList.pageSize} hideOnSinglePage={true} onChange={this.onHandleChangeLoanMiningListTable}/>
     )
 
     const footer_getextractdepositlist = () => (
         <Pagination total={this.state.getextractdepositlist.total} current={this.state.getextractdepositlist.page} pageSize={this.state.getextractdepositlist.pageSize} hideOnSinglePage={true} onChange={this.onHandleChangeExtractDepositlistTable}/>
     )
 
-    const columns_getdepositlist = [{
+    const columns_loanMiningList = [{
       title: 'ID',
       dataIndex: 'ID',
       key: 'ID',
@@ -105,11 +106,11 @@ class Cash extends React.Component {
       title: 'Email',
       dataIndex: 'Email',
     }, {
-      title: 'Hash',
-      dataIndex: 'Hash',
-      render: (Hash) => (
-          Hash.slice(0, 10) + '...'
-      )
+        title: '保证金',
+      dataIndex: 'Deposit',
+    }, {
+      title: '挖矿资金',
+      dataIndex: 'Loan',
     },{
       title: '审核状态',
       dataIndex: 'State',
@@ -178,7 +179,7 @@ class Cash extends React.Component {
                 </div>
                 <Row style={{marginTop: 30}}>
                   <Col md={6} sm={24}>
-                    <StartMineForm onComplete={this.getDepositlist}/>
+                    <StartMineForm onComplete={this.getLoanMiningList}/>
                   </Col>
                   <Col md={6} sm={24}>
                     <EndMineForm/>
@@ -189,12 +190,12 @@ class Cash extends React.Component {
 
             <Col span={24}>
               <Card style={{margin: 20, marginTop: 0}}>
-                <h3 style={{padding: 10}}>申请增加保证金列表</h3>
+                <h3 style={{padding: 10}}>申请借币挖矿列表</h3>
                 <Table rowKey="ID"
-                       dataSource={this.state.getdepositlist.data}
-                       columns={columns_getdepositlist}
+                       dataSource={this.state.getLoanMiningList.data}
+                       columns={columns_loanMiningList}
                        pagination={false}
-                       footer={footer_getdepositlist}
+                       footer={footer_loanMiningList}
                 />
               </Card>
             </Col>
@@ -209,4 +210,4 @@ class Cash extends React.Component {
     )
   }
 }
-export default Cash;
+export default Miner;

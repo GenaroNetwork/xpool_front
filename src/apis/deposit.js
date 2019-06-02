@@ -2,7 +2,7 @@ import axios from 'axios';
 import Config from '../config';
 import qs from 'qs';
 
-function getDepositList(token, page=1, pageSize=30) {
+function getDepositList(token, page=1, pageSize=10) {
   return axios.post(`${Config.HOST}/deposit/getdepositlist`, qs.stringify({
     token,
     page,
@@ -41,19 +41,10 @@ function getDepositBalance(token) {
 }
 
 
-function loanMining(token, value, password) {
-  return axios.post(`${Config.HOST}/mining/loanmining`, qs.stringify({
-    token,
-    value,
-    password
-  }))
-}
-
 export {
   getDepositList,
   addDesposit,
   extractDeposit,
   getextractDepositlist,
   getDepositBalance,
-  loanMining,
 }
