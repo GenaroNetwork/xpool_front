@@ -40,10 +40,20 @@ function getDepositBalance(token) {
   }))
 }
 
+
+function loanMining(token, value, password) {
+  return axios.post(`${Config.HOST}/mining/loanmining`, qs.stringify({
+    token,
+    value,
+    password
+  }))
+}
+
 export {
   getDepositList,
   addDesposit,
   extractDeposit,
   getextractDepositlist,
   getDepositBalance,
+  loanMining,
 }

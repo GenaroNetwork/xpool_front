@@ -12,13 +12,13 @@ class Cash extends React.Component {
       deposit: 0,
       getdepositlist: {
         page: 1,
-        pageSize: 30,
+        pageSize: 10,
         data: [],
         total: 0
       },
       getextractdepositlist: {
         page: 1,
-        pageSize: 30,
+        pageSize: 10,
         data: [],
         total: 0
       },
@@ -63,6 +63,7 @@ class Cash extends React.Component {
             data: res.data.data.extract_deposit_list
           })
         }))
+        this.getDepositBalance();
       }
     })
   };
@@ -82,6 +83,10 @@ class Cash extends React.Component {
     this.getDepositlist(page, pageSize);
   }
 
+  onHandleChangeExtractDepositlistTable = (page, pageSize) => {
+    this.getextractDepositlist(page, pageSize);
+  }
+
   render() {
 
     const footer_getdepositlist = () => (
@@ -89,7 +94,7 @@ class Cash extends React.Component {
     )
 
     const footer_getextractdepositlist = () => (
-      <Pagination total={this.state.getextractdepositlist.total} current={this.state.getextractdepositlist.page} pageSize={this.state.getextractdepositlist.pageSize} hideOnSinglePage={true}/>
+      <Pagination total={this.state.getextractdepositlist.total} current={this.state.getextractdepositlist.page} pageSize={this.state.getextractdepositlist.pageSize} hideOnSinglePage={true} onChange={this.onHandleChangeExtractDepositlistTable}/>
     )
 
     const columns_getdepositlist = [{
@@ -176,7 +181,7 @@ class Cash extends React.Component {
                   <AddDepositForm onComplete={this.getDepositlist}/>
                 </Col>
                 <Col md={6} sm={24}>
-                  <WithdrawDepositForm/>
+                  <WithdrawDepositForm onComplete={this.getextractDepositlist}/>
                 </Col>
               </Row>
             </Card>
