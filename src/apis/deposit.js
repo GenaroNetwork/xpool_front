@@ -34,9 +34,16 @@ function getextractDepositlist(token, page, pageSize) {
   }))
 }
 
+function getDepositBalance(token) {
+  return axios.post(`${Config.HOST}/deposit/deposit_balance`, qs.stringify({
+    token
+  }))
+}
+
 export {
   getDepositList,
   addDesposit,
   extractDeposit,
   getextractDepositlist,
+  getDepositBalance,
 }

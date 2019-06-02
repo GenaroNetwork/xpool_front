@@ -22,12 +22,14 @@ class Cash extends React.Component {
         data: [],
         total: 0
       },
+      depositBalance:0.00
     }
   }
 
   componentWillMount() {
     this.getDepositlist(this.state.getdepositlist.page, this.state.getdepositlist.pageSize);
     this.getextractDepositlist(this.state.getextractdepositlist.page, this.state.getextractdepositlist.pageSize);
+    this.getDepositBalance()
   }
 
   componentWillUpdate() {
@@ -61,6 +63,17 @@ class Cash extends React.Component {
             data: res.data.data.extract_deposit_list
           })
         }))
+      }
+    })
+  };
+
+  getDepositBalance = () => {
+    const token = localStorage.getItem('xpool-token');
+    Api.getDepositBalance(token).then(res => {
+      if (res.data.code===200) {
+        this.setState({
+          depositBalance: res.data.data
+        })
       }
     })
   }
@@ -120,17 +133,10 @@ class Cash extends React.Component {
 
     const columns_getextractdepositlist = [{
       title: 'ID',
-      dataIndex: 'id',
+      dataIndex: 'ID',
     }, {
       title: 'Email',
       dataIndex: 'Email',
-    }, {
-      title: 'Hash',
-      dataIndex: 'Hash',
-      key: 'Hash',
-      render: (Hash) => (
-        Hash.slice(0, 10) + '...'
-      )
     },{
       title: '取现金额',
       dataIndex: 'Value',
@@ -163,7 +169,7 @@ class Cash extends React.Component {
           <Col md={12} sm={24}>
             <Card style={{margin: 20}}>
               <div className="header">
-                <h2>抵押保证金余额: <span style={{paddingLeft: 10 }}>20009</span></h2>
+                <h2>抵押保证金余额: <span style={{paddingLeft: 10 }}>{this.state.depositBalance}</span></h2>
               </div>
               <Row style={{marginTop: 30}}>
                 <Col md={6} sm={24}>
@@ -190,7 +196,7 @@ class Cash extends React.Component {
           <Col span={24}>
             <Card style={{margin: 20, marginTop: 0}}>
               <h3 style={{padding: 10}}>申请提现保证金列表</h3>
-              <Table dataSource={[]} columns={columns_getextractdepositlist } pagination={false} footer={footer_getextractdepositlist} />
+              <Table dataSource={this.state.getextractdepositlist.data} columns={columns_getextractdepositlist } pagination={false} footer={footer_getextractdepositlist} />
             </Card>
           </Col>
         </Row>
