@@ -72,7 +72,7 @@ class Forget extends React.Component {
               getFieldDecorator('email', {
                 rules: [{ required: true, message: '请输入你的Email!' }]
               })(
-                <Input prefix={<Icon type="safety" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" type="password" />
+                <Input prefix={<Icon type="safety" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
               )
             }
           </Form.Item>
