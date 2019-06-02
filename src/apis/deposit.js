@@ -2,7 +2,7 @@ import axios from 'axios';
 import Config from '../config';
 import qs from 'qs';
 
-function getDepositList(token, page=1, pageSize=10) {
+function getDepositList(token, page=1, pageSize=30) {
   return axios.post(`${Config.HOST}/deposit/getdepositlist`, qs.stringify({
     token,
     page,
@@ -39,7 +39,6 @@ function getDepositBalance(token) {
     token
   }))
 }
-
 
 export {
   getDepositList,

@@ -40,7 +40,6 @@ class WithdrawDepositForm extends React.Component {
                 confirmLoading: false,
               });
               this.resetForm();
-              this.props.onComplete();
               message.info('申请提取保证金成功')
               break;
             default:
