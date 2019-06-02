@@ -78,6 +78,7 @@ class Miner extends React.Component {
         })
       }
     })
+    
   }
 
   onHandleChangeLoanMiningListTable = (page, pageSize) => {
