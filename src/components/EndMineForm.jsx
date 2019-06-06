@@ -31,8 +31,8 @@ class EndMineForm extends React.Component {
         this.setState({
           confirmLoading: true,
           visible: true,
-        })
-        Api.extractDeposit(token, values.password, values.value).then(res => {
+        });
+        Api.extractloanmining(token, values.password).then(res => {
           switch (res.data.code) {
             case 200:
               this.setState({
@@ -71,26 +71,17 @@ class EndMineForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Button type="danger" onClick={this.withdrawDeposit}>提现保证金</Button>
+        <Button type="danger" onClick={this.withdrawDeposit}>结束挖矿</Button>
         <Modal
-          title="提现保证金"
+          title="结束挖矿"
           visible={this.state.visible}
           onOk={this.handleWithdraw}
           confirmLoading={this.state.confirmLoading}
           onCancel={this.handleCancelWithdraw}
           cancelText="取消"
-          okText="确认提现保证金"
+          okText="确认结束挖矿"
         >
           <Form className="xpool-user-register-form">
-            <Form.Item>
-              {
-                getFieldDecorator('value', {
-                  rules: [{ required: true, message: '请输入你的提取金额!' }]
-                })(
-                  <Input prefix={<Icon type="wallet" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="提取金额" />
-                )
-              }
-            </Form.Item>
             <Form.Item>
               {
                 getFieldDecorator('password', {

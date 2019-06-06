@@ -18,7 +18,26 @@ function getLoanMiningList(token, page=1, pageSize=10) {
   }))
 }
 
+function extractloanmining(token, password, value) {
+  return axios.post(`${Config.HOST}/mining/extractloanmining`, qs.stringify({
+    token,
+    password,
+    value
+  }))
+}
+
+
+function getextractloanmininglist(token, page, pageSize) {
+  return axios.post(`${Config.HOST}/mining/getextractloanmininglist`, qs.stringify({
+    token,
+    page,
+    pageSize
+  }))
+}
+
 export  {
   loanMining,
-  getLoanMiningList
+  getLoanMiningList,
+  extractloanmining,
+  getextractloanmininglist,
 }
