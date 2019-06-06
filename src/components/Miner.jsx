@@ -12,13 +12,13 @@ class Miner extends React.Component {
       deposit: 0,
       getLoanMiningList: {
         page: 1,
-        pageSize: 10,
+        pageSize: 5,
         data: [],
         total: 0
       },
       getextractdepositlist: {
         page: 1,
-        pageSize: 10,
+        pageSize: 5,
         data: [],
         total: 0
       },
@@ -28,7 +28,7 @@ class Miner extends React.Component {
 
   componentWillMount() {
     this.getLoanMiningList(this.state.getLoanMiningList.page, this.state.getLoanMiningList.pageSize);
-    this.getextractDepositlist(this.state.getextractdepositlist.page, this.state.getextractdepositlist.pageSize);
+    this.getextractloanmininglist(this.state.getextractdepositlist.page, this.state.getextractdepositlist.pageSize);
     this.getDepositBalance()
   }
 
@@ -52,9 +52,9 @@ class Miner extends React.Component {
     })
   }
 
-  getextractDepositlist = (page, pageSize) => {
+  getextractloanmininglist = (page, pageSize) => {
     const token = localStorage.getItem('xpool-token');
-    Api.getextractDepositlist(token, page, pageSize).then(res => {
+    Api.getextractloanmininglist(token, page, pageSize).then(res => {
       if (res.data.code) {
         this.setState(preState => ({
           getextractdepositlist: Object.assign({}, preState.getextractdepositlist, {
@@ -86,7 +86,7 @@ class Miner extends React.Component {
   }
 
   onHandleChangeExtractDepositlistTable = (page, pageSize) => {
-    this.getextractDepositlist(page, pageSize);
+    this.getextractloanmininglist(page, pageSize);
   }
 
   render() {
@@ -202,7 +202,7 @@ class Miner extends React.Component {
             </Col>
             <Col span={24}>
               <Card style={{margin: 20, marginTop: 0}}>
-                <h3 style={{padding: 10}}>申请提现保证金列表</h3>
+                <h3 style={{padding: 10}}>申请结束挖矿列表</h3>
                 <Table dataSource={this.state.getextractdepositlist.data} columns={columns_getextractdepositlist } pagination={false} footer={footer_getextractdepositlist} />
               </Card>
             </Col>

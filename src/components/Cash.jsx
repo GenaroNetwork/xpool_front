@@ -12,13 +12,13 @@ class Cash extends React.Component {
       deposit: 0,
       getdepositlist: {
         page: 1,
-        pageSize: 10,
+        pageSize: 5,
         data: [],
         total: 0
       },
       getextractdepositlist: {
         page: 1,
-        pageSize: 10,
+        pageSize: 5,
         data: [],
         total: 0
       },
