@@ -40,6 +40,21 @@ function getDepositBalance(token) {
   }))
 }
 
+function adminGetDepositList(token, page=1, pageSize=10) {
+  return axios.post(`${Config.HOST}/deposit/admingetdepositlist`, qs.stringify({
+    token,
+    page,
+    pageSize
+  }))
+}
+function adminGetExtractDepositList(token, page, pageSize) {
+  return axios.post(`${Config.HOST}/deposit/admingetextractdepositlist`, qs.stringify({
+    token,
+    page,
+    pageSize
+  }))
+}
+
 
 export {
   getDepositList,
@@ -47,4 +62,6 @@ export {
   extractDeposit,
   getextractDepositlist,
   getDepositBalance,
+  adminGetDepositList,
+  adminGetExtractDepositList,
 }
