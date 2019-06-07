@@ -4,6 +4,8 @@ import { withRouter, Switch, Route } from 'react-router-dom';
 import Assets from './components/Assets';
 import Cash from './components/Cash';
 import Miner from './components/Miner';
+import ReviewCash from './components/ReviewCash';
+import ReviewMiner from './components/ReviewMiner';
 
 const { Sider, Content, Footer } = Layout;
 
@@ -33,6 +35,16 @@ class Main extends Component {
           defaultSelectedKeys: ['2']
         })
         break;
+      case '/reviewCash':
+        this.setState({
+          defaultSelectedKeys: ['4']
+        })
+        break;
+      case '/reviewMiner':
+        this.setState({
+          defaultSelectedKeys: ['5']
+        })
+        break;
       default:
         break;
     }
@@ -48,6 +60,12 @@ class Main extends Component {
         break;
       case "3":
         this.props.history.push('/miner');
+        break;
+      case "4":
+        this.props.history.push('/reviewCash');
+        break;
+      case "5":
+        this.props.history.push('/reviewMiner');
         break;
       default:
         this.props.history.push('/');
@@ -78,6 +96,14 @@ class Main extends Component {
                 <Icon type="file-sync" />
                 借币挖矿
               </Menu.Item>
+              <Menu.Item key="4">
+                <Icon type="gold" />
+                审核保证金管理
+              </Menu.Item>
+              <Menu.Item key="5">
+                <Icon type="file-sync" />
+                审核借币挖矿
+              </Menu.Item>
             </Menu>
           </Sider>
           <Layout>
@@ -87,6 +113,8 @@ class Main extends Component {
                 <Route path="/assets" component={Assets} />
                 <Route path="/cash" component={Cash} />
                 <Route path="/miner" component={Miner} />
+                <Route path="/reviewcash" component={ReviewCash} />
+                <Route path="/reviewminer" component={ReviewMiner} />
               </Switch>
             </Content>
             <Footer>

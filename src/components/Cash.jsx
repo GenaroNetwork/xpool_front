@@ -201,7 +201,12 @@ class Cash extends React.Component {
           <Col span={24}>
             <Card style={{margin: 20, marginTop: 0}}>
               <h3 style={{padding: 10}}>申请提现保证金列表</h3>
-              <Table dataSource={this.state.getextractdepositlist.data} columns={columns_getextractdepositlist } pagination={false} footer={footer_getextractdepositlist} />
+              <Table rowKey="ID"
+                     dataSource={this.state.getextractdepositlist.data}
+                     columns={columns_getextractdepositlist }
+                     pagination={false}
+                     footer={footer_getextractdepositlist}
+              />
             </Card>
           </Col>
         </Row>
