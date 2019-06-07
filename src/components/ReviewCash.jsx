@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Table, Pagination,} from 'antd';
+import { Row, Col, Card, Table, Pagination,Button} from 'antd';
 import * as Api from '../apis';
 
 
@@ -47,7 +47,7 @@ class ReviewCash extends React.Component {
                 }))
             }
         })
-    }
+    };
 
     adminGetExtractDepositList = (page, pageSize) => {
         const token = localStorage.getItem('xpool-token');
@@ -75,15 +75,19 @@ class ReviewCash extends React.Component {
                 })
             }
         })
-    }
+    };
 
     onHandleChangeDepositlistTable = (page, pageSize) => {
         this.adminGetDepositList(page, pageSize);
-    }
+    };
 
     onHandleChangeExtractDepositlistTable = (page, pageSize) => {
         this.adminGetExtractDepositList(page, pageSize);
-    }
+    };
+
+    depositreview = () => {
+        console.log("eee")
+    };
 
     render() {
 
@@ -130,9 +134,16 @@ class ReviewCash extends React.Component {
                 <span style={{color: '#EF1234'}}>{text}</span>
             )
         },{
-            title: '申请添加时间',
+            title: '申请时间',
             dataIndex: 'CreatedAt',
-        }];
+        },{
+            title: '操作',
+            key: 'action',
+            render: (text, record) => (
+                <Button type="primary" onClick={this.depositreview}>审核</Button>
+            ),
+        },
+        ];
 
         const columns_getextractdepositlist = [{
             title: 'ID',
