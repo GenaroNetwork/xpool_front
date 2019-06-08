@@ -98,11 +98,11 @@ class Main extends Component {
               </Menu.Item>
               <Menu.Item key="4">
                 <Icon type="gold" />
-                审核保证金管理
+                审核保证金
               </Menu.Item>
               <Menu.Item key="5">
                 <Icon type="file-sync" />
-                审核借币挖矿
+                审核挖矿
               </Menu.Item>
             </Menu>
           </Sider>
