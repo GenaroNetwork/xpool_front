@@ -35,9 +35,28 @@ function getextractloanmininglist(token, page, pageSize) {
   }))
 }
 
+function isBindingMiningAddress(loanMiningId,token) {
+  return axios.post(`${Config.HOST}/mining/isbindingminingaddress`, qs.stringify({
+    loanMiningId,
+    token
+  }))
+}
+
+function loanMiningReview(loanMiningId,reason,token,password,states,address) {
+  return axios.post(`${Config.HOST}/mining/loanminingreview`, qs.stringify({
+    loanMiningId,
+    reason,
+    token,
+    password,
+    states,
+    address
+  }))
+}
 export  {
   loanMining,
   getLoanMiningList,
   extractloanmining,
   getextractloanmininglist,
+  isBindingMiningAddress,
+  loanMiningReview,
 }

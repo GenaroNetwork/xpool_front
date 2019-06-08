@@ -429,7 +429,6 @@ class ReviewCash extends React.Component {
                                 placeholder="请选择"
                                 optionFilterProp="children"
                                 onChange={this.onChangeExtractDepositReview}
-                                onOk={this.handleDepositReview}
                                 size={"large"}
                                 filterOption={(input, option) =>
                                     option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
