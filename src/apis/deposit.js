@@ -65,6 +65,16 @@ function depositReview(depositId,reason,token,password,states) {
   }))
 }
 
+function extractDepositReview(extractDepositId,reason,token,password,states) {
+  return axios.post(`${Config.HOST}/deposit/extractdepositreview`, qs.stringify({
+    extractDepositId,
+    reason,
+    token,
+    password,
+    states
+  }))
+}
+
 export {
   getDepositList,
   addDesposit,
@@ -73,5 +83,6 @@ export {
   getDepositBalance,
   adminGetDepositList,
   adminGetExtractDepositList,
-  depositReview
+  depositReview,
+  extractDepositReview
 }
