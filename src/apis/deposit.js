@@ -55,6 +55,15 @@ function adminGetExtractDepositList(token, page, pageSize) {
   }))
 }
 
+function depositReview(depositId,reason,token,password,states) {
+  return axios.post(`${Config.HOST}/deposit/depositreview`, qs.stringify({
+    depositId,
+    reason,
+    token,
+    password,
+    states
+  }))
+}
 
 export {
   getDepositList,
@@ -64,4 +73,5 @@ export {
   getDepositBalance,
   adminGetDepositList,
   adminGetExtractDepositList,
+  depositReview
 }

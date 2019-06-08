@@ -1,7 +1,8 @@
 import React from 'react';
-import { Row, Col, Card, Table, Pagination,Button} from 'antd';
+import {Row, Col, Card, Table, Pagination, Button, Modal, Select, Input, message} from 'antd';
 import * as Api from '../apis';
-
+const { Option } = Select;
+const { TextArea } = Input;
 
 class ReviewCash extends React.Component {
     constructor(props) {
@@ -20,8 +21,17 @@ class ReviewCash extends React.Component {
                 data: [],
                 total: 0
             },
-            depositBalance:0.00
+            depositBalance:0.00,
+            visible: false,
+            TextAreaDiasble: false
         }
+    }
+
+    depositreviewPar = {
+        reason:'',
+        password:'',
+        states:0,
+        depositId:0
     }
 
     componentWillMount() {
@@ -85,8 +95,76 @@ class ReviewCash extends React.Component {
         this.adminGetExtractDepositList(page, pageSize);
     };
 
-    depositreview = () => {
-        console.log("eee")
+    depositreview = (text) => {
+        console.log(text.ID);
+        this.setState({
+            visible: true,
+        });
+        this.depositreviewPar = {
+            reason:'',
+            password:'',
+            states:0,
+            depositId:0
+        };
+        this.depositreviewPar.depositId=text.ID
+    };
+
+    handleCancel = () => {
+        this.setState({
+            visible: false,
+        })
+    }
+    onChange=(value)=> {
+        if (3 === value) {
+            this.setState({
+                TextAreaDiasble:true
+            })
+        }
+        if (5 === value) {
+            this.setState({
+                TextAreaDiasble:false
+            })
+        }
+        this.depositreviewPar.states = value
+    };
+
+    onChangePassword=(e)=> {
+        this.depositreviewPar.password=e.target.value
+    };
+
+    onChangeTextArea=(e)=>{
+        this.depositreviewPar.reason=e.target.value
+    };
+
+    handleDepositReview =()=>{
+        const token = localStorage.getItem('xpool-token');
+        if(0 === this.depositreviewPar.depositId){
+            return message.error("审核id不能为空")
+        }
+
+        if(0 === this.depositreviewPar.password){
+            return message.error("密码不能为空")
+        }
+
+        if(0 === this.depositreviewPar.states){
+            return message.error("请选择状态")
+        }
+
+        Api.depositReview(this.depositreviewPar.depositId, this.depositreviewPar.reason,
+            token,this.depositreviewPar.password,this.depositreviewPar.states).then(res => {
+            if (200 !=res.data.code) {
+                return message.error(res.data.data)
+            }
+            message.success(res.data.data)
+            this.setState({
+                TextAreaDiasble:false
+            })
+            this.setState({
+                visible:false
+            })
+            this.adminGetDepositList(this.state.getdepositlist.page, this.state.getdepositlist.pageSize);
+            this.getDepositBalance()
+        })
     };
 
     render() {
@@ -139,8 +217,12 @@ class ReviewCash extends React.Component {
         },{
             title: '操作',
             key: 'action',
-            render: (text, record) => (
-                <Button type="primary" onClick={this.depositreview}>审核</Button>
+            render: (_, record) => (
+                <Button
+                    type="primary"
+                    onClick={()=>this.depositreview(record)}
+                    disabled={record.state ===3 ? false:true}
+                >审核</Button>
             ),
         },
         ];
@@ -175,8 +257,7 @@ class ReviewCash extends React.Component {
         },{
             title: '申请添加时间',
             dataIndex: 'CreatedAt',
-        }]
-
+        }];
         return(
             <div>
                 <Row>
@@ -203,6 +284,48 @@ class ReviewCash extends React.Component {
                         </Card>
                     </Col>
                 </Row>
+                <Modal
+                    title={"审核保证金"}
+                    visible={this.state.visible}
+                    onOk={this.handleDepositReview}
+                    onCancel={this.handleCancel}
+                    cancelText="取消"
+                    okText="确认增加保证金"
+                >
+                    <Row>
+                        <Col span={4}></Col>
+                        <Col span={16}>
+                            <Select
+                                showSearch
+                                style={{ width: 300 }}
+                                placeholder="请选择"
+                                optionFilterProp="children"
+                                onChange={this.onChange}
+                                onOk={this.handleDepositReview}
+                                size={"large"}
+                                filterOption={(input, option) =>
+                                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                <Option value={3}>通过</Option>
+                                <Option value={5}>拒绝</Option>
+                            </Select>
+                            <Input.Password
+                                placeholder="请输入密码" size={"large"}
+                                style={{ width: 300,marginTop:10 }}
+                                onChange={this.onChangePassword}
+                            />
+                            <TextArea
+                                style={{ width: 300,marginTop:10 }}
+                                disabled={this.state.TextAreaDiasble}
+                                placeholder="审核失败理由"
+                                autosize={{ minRows: 2, maxRows: 6 }}
+                                onChange={this.onChangeTextArea}
+                            />
+                        </Col>
+                        <Col span={4}></Col>
+                    </Row>
+                </Modal>
             </div>
         )
     }
