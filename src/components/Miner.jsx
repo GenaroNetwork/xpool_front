@@ -22,14 +22,16 @@ class Miner extends React.Component {
         data: [],
         total: 0
       },
-      depositBalance:0.00
+      depositBalance:0.00,
+      loanMiningBalance:0.00,
     }
   }
 
   componentWillMount() {
     this.getLoanMiningList(this.state.getLoanMiningList.page, this.state.getLoanMiningList.pageSize);
     this.getextractloanmininglist(this.state.getextractdepositlist.page, this.state.getextractdepositlist.pageSize);
-    this.getDepositBalance()
+    this.getDepositBalance();
+    this.UserLoanMiningBalance();
   }
 
   componentWillUpdate() {
@@ -49,6 +51,7 @@ class Miner extends React.Component {
         }))
       }
       this.getDepositBalance();
+      this.UserLoanMiningBalance();
     })
   }
 
@@ -65,6 +68,7 @@ class Miner extends React.Component {
           })
         }))
         this.getDepositBalance();
+        this.UserLoanMiningBalance();
       }
     })
   };
@@ -79,15 +83,27 @@ class Miner extends React.Component {
       }
     })
     
-  }
+  };
+
+  UserLoanMiningBalance = () => {
+    const token = localStorage.getItem('xpool-token');
+    Api.userLoanMiningBalance(token).then(res => {
+      if (res.data.code===200) {
+        this.setState({
+          loanMiningBalance: res.data.data.Deposit
+        })
+      }
+    })
+
+  };
 
   onHandleChangeLoanMiningListTable = (page, pageSize) => {
     this.getLoanMiningList(page, pageSize);
-  }
+  };
 
   onHandleChangeExtractDepositlistTable = (page, pageSize) => {
     this.getextractloanmininglist(page, pageSize);
-  }
+  };
 
   render() {
 
@@ -146,7 +162,7 @@ class Miner extends React.Component {
       title: 'Email',
       dataIndex: 'Email',
     },{
-      title: '取现金额',
+      title: '保证金',
       dataIndex: 'Deposit',
     },{
       title: '审核状态',
@@ -183,8 +199,18 @@ class Miner extends React.Component {
                   <Col md={6} sm={24}>
                     <StartMineForm onComplete={this.getLoanMiningList}/>
                   </Col>
+                </Row>
+              </Card>
+            </Col>
+
+            <Col md={12} sm={24}>
+              <Card style={{margin: 20}}>
+                <div className="header">
+                  <h2>挖矿保证金: <span style={{paddingLeft: 10 }}>{this.state.loanMiningBalance}</span></h2>
+                </div>
+                <Row style={{marginTop: 30}}>
                   <Col md={6} sm={24}>
-                    <EndMineForm/>
+                    <EndMineForm onComplete={this.getextractloanmininglist}/>
                   </Col>
                 </Row>
               </Card>
