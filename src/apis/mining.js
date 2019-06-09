@@ -69,6 +69,17 @@ function admingetextractloanmininglist(token, page, pageSize) {
   }))
 }
 
+
+function extractLoanMiningReview(reviewId,reason,token,password,states) {
+  return axios.post(`${Config.HOST}/mining/extractloanminingreview`, qs.stringify({
+    reviewId,
+    reason,
+    token,
+    password,
+    states
+  }))
+}
+
 export  {
   loanMining,
   getLoanMiningList,
@@ -78,4 +89,5 @@ export  {
   loanMiningReview,
   admingetloanmininglist,
   admingetextractloanmininglist,
+  extractLoanMiningReview,
 }
