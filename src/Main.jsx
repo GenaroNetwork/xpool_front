@@ -18,7 +18,6 @@ class Main extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props);
     switch (this.props.location.pathname) {
       case '/miner':
         this.setState({

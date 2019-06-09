@@ -52,6 +52,23 @@ function loanMiningReview(loanMiningId,reason,token,password,states,address) {
     address
   }))
 }
+
+function admingetloanmininglist(token, page=1, pageSize=10) {
+  return axios.post(`${Config.HOST}/mining/admingetloanmininglist`, qs.stringify({
+    token,
+    page,
+    pageSize
+  }))
+}
+
+function admingetextractloanmininglist(token, page, pageSize) {
+  return axios.post(`${Config.HOST}/mining/admingetextractloanmininglist`, qs.stringify({
+    token,
+    page,
+    pageSize
+  }))
+}
+
 export  {
   loanMining,
   getLoanMiningList,
@@ -59,4 +76,6 @@ export  {
   getextractloanmininglist,
   isBindingMiningAddress,
   loanMiningReview,
+  admingetloanmininglist,
+  admingetextractloanmininglist,
 }

@@ -48,7 +48,7 @@ class ReviewMiner extends React.Component {
 
     getLoanMiningList = (page, pageSize) => {
         const token = localStorage.getItem('xpool-token');
-        Api.getLoanMiningList(token, page, pageSize).then(res => {
+        Api.admingetloanmininglist(token, page, pageSize).then(res => {
             if (res.data.code) {
                 this.setState(preState => ({
                     getLoanMiningList: Object.assign({}, preState.getLoanMiningList, {
@@ -65,14 +65,14 @@ class ReviewMiner extends React.Component {
 
     getextractloanmininglist = (page, pageSize) => {
         const token = localStorage.getItem('xpool-token');
-        Api.getextractloanmininglist(token, page, pageSize).then(res => {
+        Api.admingetextractloanmininglist(token, page, pageSize).then(res => {
             if (res.data.code) {
                 this.setState(preState => ({
                     getextractdepositlist: Object.assign({}, preState.getextractdepositlist, {
                         page: res.data.data.page,
                         pageSize: res.data.data.pageSize,
                         total: res.data.data.total,
-                        data: res.data.data.extract_deposit_list
+                        data: res.data.data.loan_mining_list
                     })
                 }))
                 this.getDepositBalance();
@@ -263,12 +263,16 @@ class ReviewMiner extends React.Component {
         const columns_getextractdepositlist = [{
             title: 'ID',
             dataIndex: 'ID',
+            key: 'ID',
         }, {
             title: 'Email',
             dataIndex: 'Email',
         },{
-            title: '取现金额',
-            dataIndex: 'Value',
+            title: '保证金',
+            dataIndex: 'Deposit',
+        },{
+            title: '挖矿资金',
+            dataIndex: 'Loan',
         },{
             title: '审核状态',
             dataIndex: 'State',
@@ -309,7 +313,12 @@ class ReviewMiner extends React.Component {
                     <Col span={24}>
                         <Card style={{margin: 20, marginTop: 0}}>
                             <h3 style={{padding: 10}}>申请结束挖矿列表</h3>
-                            <Table dataSource={this.state.getextractdepositlist.data} columns={columns_getextractdepositlist } pagination={false} footer={footer_getextractdepositlist} />
+                            <Table rowKey="ID"
+                                   dataSource={this.state.getextractdepositlist.data}
+                                   columns={columns_getextractdepositlist }
+                                   pagination={false}
+                                   footer={footer_getextractdepositlist}
+                            />
                         </Card>
                     </Col>
                 </Row>
