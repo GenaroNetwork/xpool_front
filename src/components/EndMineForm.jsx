@@ -40,7 +40,7 @@ class EndMineForm extends React.Component {
                 confirmLoading: false,
               });
               this.resetForm();
-              message.info('申请提取保证金成功')
+              message.info(res.data.data)
               break;
             default:
               this.resetForm();

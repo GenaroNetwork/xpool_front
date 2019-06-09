@@ -61,7 +61,7 @@ class Miner extends React.Component {
             page: res.data.data.page,
             pageSize: res.data.data.pageSize,
             total: res.data.data.total,
-            data: res.data.data.extract_deposit_list
+            data: res.data.data.loan_mining_list
           })
         }))
         this.getDepositBalance();
@@ -141,12 +141,13 @@ class Miner extends React.Component {
     const columns_getextractdepositlist = [{
       title: 'ID',
       dataIndex: 'ID',
+      key: 'ID',
     }, {
       title: 'Email',
       dataIndex: 'Email',
     },{
       title: '取现金额',
-      dataIndex: 'Value',
+      dataIndex: 'Deposit',
     },{
       title: '审核状态',
       dataIndex: 'State',
@@ -203,7 +204,12 @@ class Miner extends React.Component {
             <Col span={24}>
               <Card style={{margin: 20, marginTop: 0}}>
                 <h3 style={{padding: 10}}>申请结束挖矿列表</h3>
-                <Table dataSource={this.state.getextractdepositlist.data} columns={columns_getextractdepositlist } pagination={false} footer={footer_getextractdepositlist} />
+                <Table rowKey="ID"
+                       dataSource={this.state.getextractdepositlist.data}
+                       columns={columns_getextractdepositlist }
+                       pagination={false}
+                       footer={footer_getextractdepositlist}
+                />
               </Card>
             </Col>
           </Row>

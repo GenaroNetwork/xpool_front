@@ -35,7 +35,6 @@ class Forget extends React.Component {
     const data = this.props.form.getFieldsValue();
     if (data.email) {
       Api.getCode(data.email).then((res) => {
-        console.log(res.data.code)
         switch (res.data.code) {
           case 200:
             message.info('邮件发送成功');

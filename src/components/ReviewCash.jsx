@@ -103,7 +103,6 @@ class ReviewCash extends React.Component {
     };
 
     depositreview = (text) => {
-        console.log(text.ID);
         this.setState({
             visible: true,
         });

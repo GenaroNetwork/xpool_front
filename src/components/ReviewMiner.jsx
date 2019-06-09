@@ -24,6 +24,7 @@ class ReviewMiner extends React.Component {
             depositBalance:0.00,
             visible:false,
             TextAreaDiasble:false,
+            visibleAddr:false,
         }
     }
 
@@ -32,7 +33,7 @@ class ReviewMiner extends React.Component {
         reason:'',
         password:0,
         states:0,
-        address:0,
+        address:'',
         tag:0
     };
 
@@ -47,7 +48,7 @@ class ReviewMiner extends React.Component {
 
     getLoanMiningList = (page, pageSize) => {
         const token = localStorage.getItem('xpool-token');
-        Api.getLoanMiningList(token, page, pageSize).then(res => {
+        Api.admingetloanmininglist(token, page, pageSize).then(res => {
             if (res.data.code) {
                 this.setState(preState => ({
                     getLoanMiningList: Object.assign({}, preState.getLoanMiningList, {
@@ -64,14 +65,14 @@ class ReviewMiner extends React.Component {
 
     getextractloanmininglist = (page, pageSize) => {
         const token = localStorage.getItem('xpool-token');
-        Api.getextractloanmininglist(token, page, pageSize).then(res => {
+        Api.admingetextractloanmininglist(token, page, pageSize).then(res => {
             if (res.data.code) {
                 this.setState(preState => ({
                     getextractdepositlist: Object.assign({}, preState.getextractdepositlist, {
                         page: res.data.data.page,
                         pageSize: res.data.data.pageSize,
                         total: res.data.data.total,
-                        data: res.data.data.extract_deposit_list
+                        data: res.data.data.loan_mining_list
                     })
                 }))
                 this.getDepositBalance();
@@ -100,15 +101,12 @@ class ReviewMiner extends React.Component {
     }
 
     loanMiningReview = (record) => {
-        this.setState({
-            visible: true,
-        });
         this.loanMiningReviewPar = {
             loanMiningId:0,
             reason:'',
             password:0,
             states:0,
-            address:0,
+            address:'',
             tag:0
         };
         this.loanMiningReviewPar.loanMiningId=record.ID
@@ -118,14 +116,24 @@ class ReviewMiner extends React.Component {
             if (200 !==res.data.code) {
                 return message.error(res.data.data)
             }
-            if (false === res.data.code){
-                this.loanMiningReviewPar.tag=1
+            if (false === res.data.data){
+                this.loanMiningReviewPar.tag=1;
+                this.setState({
+                    visibleAddr: true,
+                });
+            }else {
+                this.setState({
+                    visible: true,
+                });
             }
         })
     };
     handleCancel = () => {
         this.setState({
             visible: false,
+        });
+        this.setState({
+            visibleAddr: false,
         });
     };
     onChange=(value)=> {
@@ -145,7 +153,9 @@ class ReviewMiner extends React.Component {
     onChangePassword=(e)=> {
         this.loanMiningReviewPar.password=e.target.value
     };
-
+    onChangeAddr=(e)=>{
+        this.loanMiningReviewPar.address=e.target.value
+    };
     onChangeTextArea=(e)=>{
         this.loanMiningReviewPar.reason=e.target.value
     };
@@ -182,6 +192,9 @@ class ReviewMiner extends React.Component {
             });
             this.setState({
                 visible:false
+            });
+            this.setState({
+                visibleAddr:false
             });
             this.getLoanMiningList(this.state.getLoanMiningList.page, this.state.getLoanMiningList.pageSize);
         })
@@ -250,12 +263,16 @@ class ReviewMiner extends React.Component {
         const columns_getextractdepositlist = [{
             title: 'ID',
             dataIndex: 'ID',
+            key: 'ID',
         }, {
             title: 'Email',
             dataIndex: 'Email',
         },{
-            title: '取现金额',
-            dataIndex: 'Value',
+            title: '保证金',
+            dataIndex: 'Deposit',
+        },{
+            title: '挖矿资金',
+            dataIndex: 'Loan',
         },{
             title: '审核状态',
             dataIndex: 'State',
@@ -296,7 +313,12 @@ class ReviewMiner extends React.Component {
                     <Col span={24}>
                         <Card style={{margin: 20, marginTop: 0}}>
                             <h3 style={{padding: 10}}>申请结束挖矿列表</h3>
-                            <Table dataSource={this.state.getextractdepositlist.data} columns={columns_getextractdepositlist } pagination={false} footer={footer_getextractdepositlist} />
+                            <Table rowKey="ID"
+                                   dataSource={this.state.getextractdepositlist.data}
+                                   columns={columns_getextractdepositlist }
+                                   pagination={false}
+                                   footer={footer_getextractdepositlist}
+                            />
                         </Card>
                     </Col>
                 </Row>
@@ -329,6 +351,53 @@ class ReviewMiner extends React.Component {
                                 placeholder="请输入密码" size={"large"}
                                 style={{ width: 300,marginTop:10 }}
                                 onChange={this.onChangePassword}
+                            />
+                            <TextArea
+                                style={{ width: 300,marginTop:10 }}
+                                disabled={this.state.TextAreaDiasble}
+                                placeholder="审核失败理由"
+                                autosize={{ minRows: 2, maxRows: 6 }}
+                                onChange={this.onChangeTextArea}
+                            />
+                        </Col>
+                        <Col span={4}></Col>
+                    </Row>
+                </Modal>
+
+                <Modal
+                    title={"审核挖矿"}
+                    visible={this.state.visibleAddr}
+                    onOk={this.loanMiningReviewApi}
+                    onCancel={this.handleCancel}
+                    cancelText="取消"
+                    okText="审核挖矿"
+                >
+                    <Row>
+                        <Col span={4}></Col>
+                        <Col span={16}>
+                            <Select
+                                showSearch
+                                style={{ width: 300 }}
+                                placeholder="请选择"
+                                optionFilterProp="children"
+                                onChange={this.onChange}
+                                size={"large"}
+                                filterOption={(input, option) =>
+                                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                <Option value={3}>通过</Option>
+                                <Option value={5}>拒绝</Option>
+                            </Select>
+                            <Input.Password
+                                placeholder="请输入密码" size={"large"}
+                                style={{ width: 300,marginTop:10 }}
+                                onChange={this.onChangePassword}
+                            />
+                            <Input
+                                placeholder="请输入挖矿地址" size={"large"}
+                                style={{ width: 300,marginTop:10 }}
+                                onChange={this.onChangeAddr}
                             />
                             <TextArea
                                 style={{ width: 300,marginTop:10 }}

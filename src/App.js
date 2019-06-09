@@ -32,7 +32,6 @@ class App extends Component {
 
   auth() {
     const token = localStorage.getItem('xpool-token');
-    console.log(token); 
     const tag = token? true : false;
     this.setState({
       logined: tag
