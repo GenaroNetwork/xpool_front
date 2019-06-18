@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, Button, Table, Modal } from 'antd';
 import './Assets.css';
+import * as Api from "../apis";
 
 class Assets extends React.Component {
   constructor(props) {
@@ -9,6 +10,10 @@ class Assets extends React.Component {
       ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
+      depositBalance:0.00,
+      loanMiningBalance:0.00,
+      incomeTotal:0.00,
+      incomeBalance:0.00,
     }
   }
 
@@ -34,6 +39,65 @@ class Assets extends React.Component {
     this.setState({
       visible: false,
     });
+  }
+
+  getDepositBalance = () => {
+    const token = localStorage.getItem('xpool-token');
+    Api.getDepositBalance(token).then(res => {
+      if (res.data.code===200) {
+        this.setState({
+          depositBalance: res.data.data
+        })
+      }
+    })
+
+  };
+
+  UserLoanMiningBalance = () => {
+    const token = localStorage.getItem('xpool-token');
+    Api.userLoanMiningBalance(token).then(res => {
+      if (res.data.code===200) {
+        this.setState({
+          loanMiningBalance: res.data.data.Deposit
+        })
+      }
+    })
+  };
+
+  ///income/income_total
+  ///income/income_balance
+  incomeTotal = () => {
+    const token = localStorage.getItem('xpool-token');
+    Api.incomeTotal(token).then(res => {
+      if (res.data.code===200) {
+        this.setState({
+          incomeTotal: res.data.data
+        })
+      }
+    })
+
+  };
+
+  incomeBalance = () => {
+    const token = localStorage.getItem('xpool-token');
+    Api.incomeBalance(token).then(res => {
+      if (res.data.code===200) {
+        this.setState({
+          incomeBalance: res.data.data
+        })
+      }
+    })
+  };
+
+  componentWillUpdate() {
+
+  }
+
+  componentWillMount(){
+    this.getDepositBalance();
+    this.UserLoanMiningBalance();
+    this.incomeTotal();
+    this.incomeBalance();
   }
 
   render() {
@@ -78,27 +142,34 @@ class Assets extends React.Component {
           <p>Some contents...</p>
         </Modal>
         <Row justify="space-around" type="flex">
-          <Col md={8} sm={24} style={{padding: 10}}>
+          <Col md={6} sm={24} style={{padding: 10}}>
             <Card>
               <div className="header">
-                <h2>余额: <span style={{paddingLeft: 10 }}>20009</span></h2>
+                <h2>保证金: <span style={{paddingLeft: 10 }}>{this.state.depositBalance}</span></h2>
               </div>
             </Card>
           </Col>
-          <Col md={8} sm={24} style={{padding: 10, paddingLeft: 0}}>
+          <Col md={6} sm={24} style={{padding: 10, paddingLeft: 0}}>
             <Card>
               <div className="header">
-                <h2>挖矿收益: <span style={{paddingLeft: 10 }}>20009</span></h2>
+                <h2>挖矿保证金: <span style={{paddingLeft: 10 }}>{this.state.loanMiningBalance}</span></h2>
               </div>
             </Card>
           </Col>
-          <Col md={8} sm={24} style={{padding: 10, paddingLeft: 0}}>
+
+          <Col md={6} sm={24} style={{padding: 10, paddingLeft: 0}}>
             <Card>
               <div className="header">
-                <h2>可提现金额: <span style={{paddingLeft: 10 }}>20009</span></h2>
+                <h2>挖矿总收益: <span style={{paddingLeft: 10 }}>{this.state.incomeTotal}</span></h2>
+              </div>
+            </Card>
+          </Col>
+          <Col md={6} sm={24} style={{padding: 10, paddingLeft: 0}}>
+            <Card>
+              <div className="header">
+                <h2>可提现收益: <span style={{paddingLeft: 10 }}>{this.state.incomeBalance}</span></h2>
                 <Button type="primary" onClick={this.showModal}>提现</Button>
               </div>
-              
             </Card>
           </Col>
         </Row>
