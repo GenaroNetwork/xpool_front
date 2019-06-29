@@ -6,6 +6,7 @@ import Cash from './components/Cash';
 import Miner from './components/Miner';
 import ReviewCash from './components/ReviewCash';
 import ReviewMiner from './components/ReviewMiner';
+import ReviewIncome from './components/reviewincome';
 
 const { Sider, Content, Footer } = Layout;
 
@@ -44,6 +45,11 @@ class Main extends Component {
           defaultSelectedKeys: ['5']
         })
         break;
+      case '/incomeMiner':
+        this.setState({
+          defaultSelectedKeys: ['6']
+        })
+        break;
       default:
         break;
     }
@@ -65,6 +71,9 @@ class Main extends Component {
         break;
       case "5":
         this.props.history.push('/reviewMiner');
+        break;
+      case "6":
+        this.props.history.push('/reviewincome');
         break;
       default:
         this.props.history.push('/');
@@ -103,6 +112,10 @@ class Main extends Component {
                 <Icon type="file-sync" />
                 审核挖矿
               </Menu.Item>
+              <Menu.Item key="6">
+                <Icon type="file-sync" />
+                审核收益
+              </Menu.Item>
             </Menu>
           </Sider>
           <Layout>
@@ -114,6 +127,7 @@ class Main extends Component {
                 <Route path="/miner" component={Miner} />
                 <Route path="/reviewcash" component={ReviewCash} />
                 <Route path="/reviewminer" component={ReviewMiner} />
+                <Route path="/reviewincome" component={ReviewIncome} />
               </Switch>
             </Content>
             <Footer>

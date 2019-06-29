@@ -32,9 +32,32 @@ function extract_income_list(token, page=1, pageSize=10) {
     }))
 }
 
+
+function admin_extract_income_list(token, page=1, pageSize=10) {
+    return axios.post(`${Config.HOST}/income/admin_extract_income_list`, qs.stringify({
+        token,
+        page,
+        pageSize
+    }))
+}
+
+
+
+function extract_income_review(reviewId,reason,token,password,states) {
+    return axios.post(`${Config.HOST}/income/extract_income_review`, qs.stringify({
+        reviewId,
+        reason,
+        token,
+        password,
+        states
+    }))
+}
+
 export {
     incomeTotal,
     incomeBalance,
     extract_income_balance,
-    extract_income_list
+    extract_income_list,
+    admin_extract_income_list,
+    extract_income_review,
 }
