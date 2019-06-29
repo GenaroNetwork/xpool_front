@@ -83,7 +83,7 @@ class StartMineForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Button type="primary" onClick={this.addDeposit}>借币挖矿</Button>
+        <Button type="primary" onClick={this.addDeposit}>申请挖矿</Button>
         <Modal
           title="申请挖矿"
           visible={this.state.visible}

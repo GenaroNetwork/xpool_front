@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Card, Table, Pagination, Button, Modal, Select, Input, message} from 'antd';
+import {Row, Col, Card, Table, Pagination, Button, Modal, Select, Input, message,Tooltip} from 'antd';
 import * as Api from '../apis';
 const { Option } = Select;
 const { TextArea } = Input;
@@ -261,8 +261,13 @@ class ReviewCash extends React.Component {
             title: 'Hash',
             dataIndex: 'Hash',
             render: (Hash) => (
-                Hash.slice(0, 10) + '...'
+                <Tooltip placement="top" title={Hash}>
+                    {Hash.slice(0, 10) + '...'}
+                </Tooltip>
             )
+        }, {
+            title: 'Value',
+            dataIndex: 'Value',
         },{
             title: '审核状态',
             dataIndex: 'State',

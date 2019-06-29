@@ -58,6 +58,9 @@ class Assets extends React.Component {
         this.getDepositlist(1,5);
         return message.success(res.data.data)
       }else{
+        this.setState({
+          confirmLoading:false,
+        });
         return message.error(res.data.data)
       }
     })
