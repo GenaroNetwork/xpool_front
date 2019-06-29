@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Dropdown, Menu, Icon } from 'antd';
+import {Layout, Dropdown, Menu, Icon, message} from 'antd';
 import { withRouter, Route, Switch, Link } from 'react-router-dom';
 import Main from './Main';
 import Login from './components/Login';
@@ -61,11 +61,22 @@ class App extends Component {
   }
 
   logout() {
+    const token = localStorage.getItem('xpool-token');
+    Api.logout(token).then(res => {
+      switch (res.data.code) {
+        case 200:
+          message.success(res.data.data)
+          break;
+        default:
+          message.error(res.data.data)
+      }
+    })
     localStorage.clear('xpool-token');
     this.setState({
-      logined: false,
-      email: null
-    })
+      email: null,
+      logined:false
+    });
+    this.props.history.push('/login')
   }
 
 

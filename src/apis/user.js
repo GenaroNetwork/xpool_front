@@ -44,11 +44,18 @@ function resetPassword(token, oldPassword, newPassword) {
   }))
 }
 
+function logout(token) {
+  return axios.post(`${Config.HOST}/user/logout`, qs.stringify({
+    token
+  }))
+}
+
 export {
   getCode,
   register,
   login,
   getUserInfo,
   forgetPassword,
-  resetPassword
+  resetPassword,
+  logout
 }

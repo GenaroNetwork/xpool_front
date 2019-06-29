@@ -12,7 +12,8 @@ class Reset extends React.Component {
           switch (res.data.code) {
             case 200:
               this.resetForm()
-              message.success('重置密码成功')
+              this.props.history.push('/login')
+              message.success('重置密码成功,请重新登陆')
               break;
             case 10030:
               this.resetForm()
