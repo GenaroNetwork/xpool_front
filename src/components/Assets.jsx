@@ -55,6 +55,7 @@ class Assets extends React.Component {
           confirmLoading:false,
         });
         this.incomeBalance();
+        this.getDepositlist(1,5);
         return message.success(res.data.data)
       }else{
         return message.error(res.data.data)

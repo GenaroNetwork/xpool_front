@@ -218,7 +218,7 @@ class Miner extends React.Component {
 
             <Col span={24}>
               <Card style={{margin: 20, marginTop: 0}}>
-                <h3 style={{padding: 10}}>申请借币挖矿列表</h3>
+                <h3 style={{padding: 10}}>申请挖矿列表</h3>
                 <Table rowKey="ID"
                        dataSource={this.state.getLoanMiningList.data}
                        columns={columns_loanMiningList}

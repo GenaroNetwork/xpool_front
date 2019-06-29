@@ -85,13 +85,13 @@ class StartMineForm extends React.Component {
       <div>
         <Button type="primary" onClick={this.addDeposit}>借币挖矿</Button>
         <Modal
-          title="借币挖矿"
+          title="申请挖矿"
           visible={this.state.visible}
           onOk={this.handleLoanMining}
           confirmLoading={this.state.confirmLoading}
           onCancel={this.handleCancelLoanMining}
           cancelText="取消"
-          okText="确认借币挖矿"
+          okText="确认申请挖矿"
         >
           <Form className="xpool-user-register-form">
             <Form.Item>

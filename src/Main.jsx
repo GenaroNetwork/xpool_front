@@ -102,7 +102,7 @@ class Main extends Component {
               </Menu.Item>
               <Menu.Item key="3">
                 <Icon type="file-sync" />
-                借币挖矿
+                申请挖矿
               </Menu.Item>
               <Menu.Item key="4">
                 <Icon type="gold" />
