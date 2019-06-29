@@ -15,7 +15,26 @@ function incomeBalance(token) {
     }))
 }
 
+function extract_income_balance(token,value,password) {
+    return axios.post(`${Config.HOST}/income/extract_income_balance`, qs.stringify({
+        token,
+        value,
+        password
+    }))
+}
+
+
+function extract_income_list(token, page=1, pageSize=10) {
+    return axios.post(`${Config.HOST}/income/extract_income_list`, qs.stringify({
+        token,
+        page,
+        pageSize
+    }))
+}
+
 export {
     incomeTotal,
-    incomeBalance
+    incomeBalance,
+    extract_income_balance,
+    extract_income_list
 }
