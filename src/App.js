@@ -45,6 +45,11 @@ class App extends Component {
             })
             break;
           default:
+            this.setState({
+              email: null,
+              logined:false
+            });
+            localStorage.setItem('xpool-token',null);
             break;
         }
       })
