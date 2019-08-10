@@ -213,7 +213,7 @@ class ReviewMiner extends React.Component {
                     onOk={this.extractLoanMiningReviewApi}
                     onCancel={this.handleCancel}
                     cancelText="取消"
-                    okText="审核挖矿"
+                    okText="审核提现"
                 >
                     <Row>
                         <Col span={4}></Col>
