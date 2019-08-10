@@ -83,9 +83,9 @@ class AddDepositForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Button type="primary" onClick={this.addDeposit}>增加保证金</Button>
+        <Button type="primary" onClick={this.addDeposit}>申请增加保证金</Button>
         <Modal
-          title="增加保证金"
+          title="申请增加保证金"
           visible={this.state.visible}
           onOk={this.handleAdddeposit}
           confirmLoading={this.state.confirmLoading}
