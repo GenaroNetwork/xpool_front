@@ -7,6 +7,7 @@ import IncreaseMargin from "./IncreaseMargin";
 import ApplyForMining from "./ApplyForMining"
 import EndMargin  from "./endMargin"
 import WithdrawalMargin from "./WithdrawalMargin";
+import Income from "./income"
 const { Step } = Steps;
 
 class Assets extends React.Component {
@@ -47,7 +48,7 @@ class Assets extends React.Component {
       content: "",
     },
     {
-      title: '增加保证金',
+      title: '申请增加保证金',
       content: <Row>
         <Col >
           <IncreaseMargin />
@@ -63,11 +64,15 @@ class Assets extends React.Component {
       </Row>,
     },
     {
-      title: '提现收益',
-      content: 'Last-content',
+      title: '申请提现收益',
+      content: <Row>
+        <Col >
+          <Income />
+        </Col>
+      </Row>,
     },
     {
-      title: '结束挖矿',
+      title: '申请结束挖矿',
       content: <Row>
         <Col >
           <EndMargin />
@@ -75,7 +80,7 @@ class Assets extends React.Component {
       </Row>,
     },
     {
-      title: '提现保证金',
+      title: '申请提现保证金',
       content: <Row>
         <Col >
           <WithdrawalMargin />
