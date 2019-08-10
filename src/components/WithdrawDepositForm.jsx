@@ -72,7 +72,7 @@ class WithdrawDepositForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Button type="danger" onClick={this.withdrawDeposit}>提现保证金</Button>
+        <Button type="primary" onClick={this.withdrawDeposit}>提现保证金</Button>
         <Modal
           title="提现保证金"
           visible={this.state.visible}
