@@ -71,7 +71,7 @@ class EndMineForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Button type="danger" onClick={this.withdrawDeposit}>结束挖矿</Button>
+        <Button type="primary" onClick={this.withdrawDeposit}>结束挖矿</Button>
         <Modal
           title="结束挖矿"
           visible={this.state.visible}
