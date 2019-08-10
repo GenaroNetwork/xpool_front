@@ -71,9 +71,9 @@ class EndMineForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
-        <Button type="primary" onClick={this.withdrawDeposit}>结束挖矿</Button>
+        <Button type="primary" onClick={this.withdrawDeposit}>申请结束挖矿</Button>
         <Modal
-          title="结束挖矿"
+          title="申请结束挖矿"
           visible={this.state.visible}
           onOk={this.handleWithdraw}
           confirmLoading={this.state.confirmLoading}
