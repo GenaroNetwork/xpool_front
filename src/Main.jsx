@@ -7,6 +7,8 @@ import Miner from './components/Miner';
 import ReviewCash from './components/ReviewCash';
 import ReviewMiner from './components/ReviewMiner';
 import ReviewIncome from './components/reviewincome';
+import Home from './components/Home';
+
 
 const { Sider, Content, Footer } = Layout;
 
@@ -75,6 +77,9 @@ class Main extends Component {
       case "6":
         this.props.history.push('/reviewincome');
         break;
+      case "7":
+        this.props.history.push('/home');
+        break;
       default:
         this.props.history.push('/');
         break;
@@ -85,39 +90,43 @@ class Main extends Component {
     return (
       <div>
         <Layout>
-          <Sider theme="light">
-              <Menu
-              style={{ minHeight: 600 }}
-              defaultSelectedKeys={this.state.defaultSelectedKeys}
-              mode="inline"
-              onClick={this.handlerMenuClick.bind(this)}
-            >
-              <Menu.Item key="1">
-                <Icon type="pay-circle" />
-                我的资产
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Icon type="gold" />
-                保证金管理
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Icon type="file-sync" />
-                申请挖矿
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Icon type="gold" />
-                审核保证金
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Icon type="file-sync" />
-                审核挖矿
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Icon type="file-sync" />
-                审核收益
-              </Menu.Item>
-            </Menu>
-          </Sider>
+          {/*<Sider theme="light">*/}
+              {/*<Menu*/}
+              {/*style={{ minHeight: 600 }}*/}
+              {/*defaultSelectedKeys={this.state.defaultSelectedKeys}*/}
+              {/*mode="inline"*/}
+              {/*onClick={this.handlerMenuClick.bind(this)}*/}
+            {/*>*/}
+              {/*<Menu.Item key="1">*/}
+                {/*<Icon type="pay-circle" />*/}
+                {/*我的资产*/}
+              {/*</Menu.Item>*/}
+              {/*<Menu.Item key="2">*/}
+                {/*<Icon type="gold" />*/}
+                {/*保证金管理*/}
+              {/*</Menu.Item>*/}
+              {/*<Menu.Item key="3">*/}
+                {/*<Icon type="file-sync" />*/}
+                {/*申请挖矿*/}
+              {/*</Menu.Item>*/}
+              {/*<Menu.Item key="4">*/}
+                {/*<Icon type="gold" />*/}
+                {/*审核保证金*/}
+              {/*</Menu.Item>*/}
+              {/*<Menu.Item key="5">*/}
+                {/*<Icon type="file-sync" />*/}
+                {/*审核挖矿*/}
+              {/*</Menu.Item>*/}
+              {/*<Menu.Item key="6">*/}
+                {/*<Icon type="file-sync" />*/}
+                {/*审核收益*/}
+              {/*</Menu.Item>*/}
+              {/*<Menu.Item key="7">*/}
+                {/*<Icon type="file-sync" />*/}
+                {/*首页*/}
+              {/*</Menu.Item>*/}
+            {/*</Menu>*/}
+          {/*</Sider>*/}
           <Layout>
             <Content>
               <Switch>
@@ -128,6 +137,7 @@ class Main extends Component {
                 <Route path="/reviewcash" component={ReviewCash} />
                 <Route path="/reviewminer" component={ReviewMiner} />
                 <Route path="/reviewincome" component={ReviewIncome} />
+                <Route path="/home" component={Home} />
               </Switch>
             </Content>
             <Footer>
