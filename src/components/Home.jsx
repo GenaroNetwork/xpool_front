@@ -258,18 +258,25 @@ class Assets extends React.Component {
         </Row>
         <Row>
           <div>
-            <div className="steps-action">
-              {this.state.current < this.steps.length - 1 && (
-                  <Button type="primary" onClick={() => this.next()}>
-                    下一步
-                  </Button>
-              )}
-              {this.state.current > 0 && (
-                  <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-                    上一步
-                  </Button>
-              )}
-            </div>
+            <Row>
+              <Col md={10}></Col>
+              <Col md={6}>
+                <div className="steps-action">
+                  {this.state.current < this.steps.length - 1 && (
+                      <Button type="primary" onClick={() => this.next()}>
+                        下一步
+                      </Button>
+                  )}
+                  {this.state.current > 0 && (
+                      <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+                        上一步
+                      </Button>
+                  )}
+                </div>
+              </Col>
+              <Col md={8}></Col>
+            </Row>
+
             <Steps current={this.state.current}>
               {this.steps.map(item => (
                   <Step key={item.title} title={item.title} />
