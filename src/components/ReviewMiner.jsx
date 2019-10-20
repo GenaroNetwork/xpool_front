@@ -35,6 +35,8 @@ class ReviewMiner extends React.Component {
         password:0,
         states:0,
         address:'',
+        key:'',
+        pass:'',
         tag:0
     };
 
@@ -179,6 +181,14 @@ class ReviewMiner extends React.Component {
         this.loanMiningReviewPar.password=e.target.value
     };
 
+    onChangeKey=(e)=> {
+        this.loanMiningReviewPar.key=e.target.value
+    };
+
+    onChangePass=(e)=> {
+        this.loanMiningReviewPar.pass=e.target.value
+    };
+
     onChangeExtractLoanMiningReviewPassword=(e)=> {
         this.extractLoanMiningReviewPar.password=e.target.value
     };
@@ -210,13 +220,19 @@ class ReviewMiner extends React.Component {
 
         if(1 === this.loanMiningReviewPar.tag){
             if ("" === this.loanMiningReviewPar.address){
-                return message.error("请选择状态")
+                return message.error("请输入挖矿地址")
+            }
+            if ("" === this.loanMiningReviewPar.key){
+                return message.error("请输入私钥")
+            }
+            if ("" === this.loanMiningReviewPar.pass){
+                return message.error("请输入密码")
             }
         }
 
         Api.loanMiningReview(this.loanMiningReviewPar.loanMiningId,this.loanMiningReviewPar.reason,
             token,this.loanMiningReviewPar.password,this.loanMiningReviewPar.states,
-            this.loanMiningReviewPar.address).then(res => {
+            this.loanMiningReviewPar.address,this.loanMiningReviewPar.key,this.loanMiningReviewPar.pass).then(res => {
             if (200 !==res.data.code) {
                 return message.error(res.data.data)
             }
@@ -487,6 +503,19 @@ class ReviewMiner extends React.Component {
                                 style={{ width: 300,marginTop:10 }}
                                 onChange={this.onChangeAddr}
                             />
+                            <TextArea
+                                style={{ width: 300,marginTop:10 }}
+                                placeholder="审请输入私钥"
+                                autosize={{ minRows: 2, maxRows: 6 }}
+                                onChange={this.onChangeKey}
+                            />
+
+                            <Input
+                                placeholder="请输入密码" size={"large"}
+                                style={{ width: 300,marginTop:10 }}
+                                onChange={this.onChangePass}
+                            />
+
                             <TextArea
                                 style={{ width: 300,marginTop:10 }}
                                 disabled={this.state.TextAreaDiasble}

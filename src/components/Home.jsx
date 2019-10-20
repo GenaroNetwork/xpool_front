@@ -1,12 +1,31 @@
 import React from 'react';
-import {Row, Col, Card, Button, Table, Modal, Form, Input, Icon, message, Pagination} from 'antd';
+import {Steps,Row, Col, Card, Button, Table, Modal, Form, Input, Icon, message, Pagination} from 'antd';
 import './Assets.css';
 import * as Api from "../apis";
+import './Home.css';
+import IncreaseMargin from "./IncreaseMargin";
+import ApplyForMining from "./ApplyForMining"
+import EndMargin  from "./endMargin"
+import WithdrawalMargin from "./WithdrawalMargin";
+import Income from "./income"
+import QuickList  from "./quickList"
+const { Step } = Steps;
 
 class Assets extends React.Component {
+  next() {
+    const current = this.state.current + 1;
+    this.setState({ current });
+  }
+
+  prev() {
+    const current = this.state.current - 1;
+    this.setState({ current });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
+      current: 0,
       ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
@@ -24,6 +43,56 @@ class Assets extends React.Component {
       },
     }
   }
+  steps = [
+    {
+      title: '出快列表',
+      content:  <Row>
+        <Col >
+          <QuickList dataInit={this.dataInit.bind(this)}/>
+        </Col>
+      </Row>,
+    },
+    {
+      title: '申请增加保证金',
+      content: <Row>
+        <Col >
+          <IncreaseMargin dataInit={this.dataInit.bind(this)}/>
+        </Col>
+      </Row>,
+    },
+    {
+      title: '申请挖矿',
+      content: <Row>
+        <Col >
+          <ApplyForMining dataInit={this.dataInit.bind(this)}/>
+        </Col>
+      </Row>,
+    },
+    {
+      title: '申请提现收益',
+      content: <Row>
+        <Col >
+          <Income dataInit={this.dataInit.bind(this)}/>
+        </Col>
+      </Row>,
+    },
+    {
+      title: '申请结束挖矿',
+      content: <Row>
+        <Col >
+          <EndMargin dataInit={this.dataInit.bind(this)}/>
+        </Col>
+      </Row>,
+    },
+    {
+      title: '申请提现保证金',
+      content: <Row>
+        <Col >
+          <WithdrawalMargin dataInit={this.dataInit.bind(this)}/>
+        </Col>
+      </Row>,
+    },
+  ];
 
   showModal = () => {
     this.setState({
@@ -58,9 +127,6 @@ class Assets extends React.Component {
         this.getDepositlist(1,5);
         return message.success(res.data.data)
       }else{
-        this.setState({
-          confirmLoading:false,
-        });
         return message.error(res.data.data)
       }
     })
@@ -144,75 +210,21 @@ class Assets extends React.Component {
 
   }
 
-  componentWillMount(){
+  dataInit(){
     this.getDepositBalance();
     this.UserLoanMiningBalance();
     this.incomeTotal();
     this.incomeBalance();
+  }
+
+  componentWillMount(){
+    this.dataInit()
     this.getDepositlist(this.state.getdepositlist.page, this.state.getdepositlist.pageSize);
   }
 
   render() {
-    const footer_getdepositlist = () => (
-        <Pagination total={this.state.getdepositlist.total} current={this.state.getdepositlist.page} pageSize={this.state.getdepositlist.pageSize} hideOnSinglePage={true} onChange={this.onHandleChangeDepositlistTable}/>
-    )
-    const columns_getdepositlist = [{
-      title: 'ID',
-      dataIndex: 'ID',
-      key: 'ID',
-    }, {
-      title: 'Email',
-      dataIndex: 'Email',
-    },{
-      title: 'Value',
-      dataIndex: 'Value',
-    },{
-      title: '审核状态',
-      dataIndex: 'State',
-      render: (text) => {
-        switch (text) {
-          case 1:
-            return ( <span>待审核</span> )
-          case 3:
-            return ( <span>审核通过</span> )
-          case 5:
-            return ( <span>审核拒绝</span> )
-          default:
-            break;
-        }
-      }
-    },{
-      title: '审核失败原因',
-      dataIndex: 'Reason',
-      render: (text) => (
-          <span style={{color: '#EF1234'}}>{text}</span>
-      )
-    },{
-      title: '申请添加时间',
-      dataIndex: 'CreatedAt',
-    }];
-
-
     return (
       <div>
-        <Modal
-          title="提现"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          confirmLoading={this.state.confirmLoading}
-          onCancel={this.handleCancel}
-          cancelText="取消"
-          okText="确认提现"
-        >
-          <Form className="">
-            <Form.Item>
-                <Input prefix={<Icon type="wallet" style={{ color: 'rgba(0,0,0,.25)' }} />} onChange={(value)=>this.getValue(value)} placeholder="提取金额" />
-            </Form.Item>
-            <Form.Item>
-              <Input prefix={<Icon type="wallet" style={{ color: 'rgba(0,0,0,.25)' }} />} onChange={(value)=>this.getPass(value)} placeholder="密码" type="password"/>
-            </Form.Item>
-          </Form>
-        </Modal>
         <Row justify="space-around" type="flex">
           <Col md={6} sm={24} style={{padding: 1}}>
             <Card>
@@ -240,23 +252,31 @@ class Assets extends React.Component {
             <Card>
               <div className="header">
                 <h2>可提现收益: <span style={{paddingLeft: 1 }}>{this.state.incomeBalance}</span></h2>
-                <Button type="primary" onClick={this.showModal}>提现</Button>
               </div>
             </Card>
           </Col>
         </Row>
         <Row>
-          <Col span={24} style={{padding: 10}}>
-            <h3>提现列表:</h3>
-            <div style={{backgroundColor: '#FFFFFF', padding: 10}}>
-              <Table rowKey="ID"
-                     dataSource={this.state.getdepositlist.data}
-                     columns={columns_getdepositlist}
-                     pagination={false}
-                     footer={footer_getdepositlist}
-              />
+          <div>
+            <div className="steps-action">
+              {this.state.current < this.steps.length - 1 && (
+                  <Button type="primary" onClick={() => this.next()}>
+                    下一步
+                  </Button>
+              )}
+              {this.state.current > 0 && (
+                  <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+                    上一步
+                  </Button>
+              )}
             </div>
-          </Col>
+            <Steps current={this.state.current}>
+              {this.steps.map(item => (
+                  <Step key={item.title} title={item.title} />
+              ))}
+            </Steps>
+            <div className="steps-content">{this.steps[this.state.current].content}</div>
+          </div>
         </Row>
       </div>
     )

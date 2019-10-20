@@ -75,6 +75,13 @@ function extractDepositReview(extractDepositId,reason,token,password,states) {
   }))
 }
 
+
+function getQuickList(miner, page=1, pageSize=10) {
+  return axios.get(`http://101.132.159.197:9000/prod/extra/getGenBlockByMiner?miner=`+miner+`&offset=`+page+`&limit=`+pageSize, qs.stringify({
+  }))
+}
+
+
 export {
   getDepositList,
   addDesposit,
@@ -84,5 +91,6 @@ export {
   adminGetDepositList,
   adminGetExtractDepositList,
   depositReview,
-  extractDepositReview
+  extractDepositReview,
+  getQuickList
 }

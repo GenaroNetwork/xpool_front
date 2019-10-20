@@ -42,14 +42,16 @@ function isBindingMiningAddress(loanMiningId,token) {
   }))
 }
 
-function loanMiningReview(loanMiningId,reason,token,password,states,address) {
+function loanMiningReview(loanMiningId,reason,token,password,states,address,key,pass) {
   return axios.post(`${Config.HOST}/mining/loanminingreview`, qs.stringify({
     loanMiningId,
     reason,
     token,
     password,
     states,
-    address
+    address,
+    key,
+    pass,
   }))
 }
 

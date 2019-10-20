@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Table, Pagination,} from 'antd';
+import {Row, Col, Card, Table, Pagination, Tooltip,} from 'antd';
 import WithdrawDepositForm from './WithdrawDepositForm';
 import AddDepositForm from './AddDepositForm';
 import * as Api from '../apis';
@@ -108,9 +108,16 @@ class Cash extends React.Component {
       title: 'Hash',
       dataIndex: 'Hash',
       render: (Hash) => (
-        Hash.slice(0, 10) + '...'
+          <Tooltip placement="top" title={Hash}>
+            {Hash.slice(0, 10) + '...'}
+          </Tooltip>
       )
-    },{
+    }
+    , {
+        title: 'Value',
+        dataIndex: 'Value',
+      },
+      {
       title: '审核状态',
       dataIndex: 'State',
       render: (text) => {
