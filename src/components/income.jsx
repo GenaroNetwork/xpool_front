@@ -55,6 +55,7 @@ class income extends React.Component {
                     visible: false,
                     confirmLoading:false,
                 });
+                this.props.dataInit()
                 this.incomeBalance();
                 this.getDepositlist(1,5);
                 return message.success(res.data.data)
@@ -145,6 +146,7 @@ class income extends React.Component {
 
     }
 
+
     componentWillMount(){
         this.getDepositBalance();
         this.UserLoanMiningBalance();
@@ -215,19 +217,12 @@ class income extends React.Component {
                     </Form>
                 </Modal>
 
-                <Col md={24} sm={24}>
                     <Card style={{margin: 20}}>
-                        <Row >
-                            <Col md={24} sm={24}>
-                                <Button type="primary" onClick={this.showModal}>申请提现收益</Button>
-                            </Col>
-                        </Row>
+                        <Button type="primary" onClick={this.showModal}>申请提现收益</Button>
                     </Card>
-                </Col>
-
                 <Row>
                     <Col span={24} style={{padding: 10}}>
-                        <h3>提现列表:</h3>
+                        <h3>提现列表</h3>
                         <div style={{backgroundColor: '#FFFFFF', padding: 10}}>
                             <Table rowKey="ID"
                                    dataSource={this.state.getdepositlist.data}
