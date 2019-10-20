@@ -46,6 +46,7 @@ class WithdrawalMargin extends React.Component {
                 }))
             }
         })
+        this.props.dataInit()
     };
 
     onHandleChangeExtractDepositlistTable = (page, pageSize) => {
