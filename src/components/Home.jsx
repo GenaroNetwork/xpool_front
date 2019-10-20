@@ -8,6 +8,7 @@ import ApplyForMining from "./ApplyForMining"
 import EndMargin  from "./endMargin"
 import WithdrawalMargin from "./WithdrawalMargin";
 import Income from "./income"
+import QuickList  from "./quickList"
 const { Step } = Steps;
 
 class Assets extends React.Component {
@@ -45,13 +46,17 @@ class Assets extends React.Component {
   steps = [
     {
       title: '出快列表',
-      content: "",
+      content:  <Row>
+        <Col >
+          <QuickList dataInit={this.dataInit.bind(this)}/>
+        </Col>
+      </Row>,
     },
     {
       title: '申请增加保证金',
       content: <Row>
         <Col >
-          <IncreaseMargin />
+          <IncreaseMargin dataInit={this.dataInit.bind(this)}/>
         </Col>
       </Row>,
     },
@@ -59,7 +64,7 @@ class Assets extends React.Component {
       title: '申请挖矿',
       content: <Row>
         <Col >
-          <ApplyForMining />
+          <ApplyForMining dataInit={this.dataInit.bind(this)}/>
         </Col>
       </Row>,
     },
@@ -67,7 +72,7 @@ class Assets extends React.Component {
       title: '申请提现收益',
       content: <Row>
         <Col >
-          <Income />
+          <Income dataInit={this.dataInit.bind(this)}/>
         </Col>
       </Row>,
     },
@@ -75,7 +80,7 @@ class Assets extends React.Component {
       title: '申请结束挖矿',
       content: <Row>
         <Col >
-          <EndMargin />
+          <EndMargin dataInit={this.dataInit.bind(this)}/>
         </Col>
       </Row>,
     },
@@ -83,7 +88,7 @@ class Assets extends React.Component {
       title: '申请提现保证金',
       content: <Row>
         <Col >
-          <WithdrawalMargin />
+          <WithdrawalMargin dataInit={this.dataInit.bind(this)}/>
         </Col>
       </Row>,
     },
@@ -205,11 +210,15 @@ class Assets extends React.Component {
 
   }
 
-  componentWillMount(){
+  dataInit(){
     this.getDepositBalance();
     this.UserLoanMiningBalance();
     this.incomeTotal();
     this.incomeBalance();
+  }
+
+  componentWillMount(){
+    this.dataInit()
     this.getDepositlist(this.state.getdepositlist.page, this.state.getdepositlist.pageSize);
   }
 
