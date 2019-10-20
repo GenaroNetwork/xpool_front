@@ -130,7 +130,7 @@ class Main extends Component {
           <Layout>
             <Content>
               <Switch>
-                <Route path="/" exact component={Assets} />
+                <Route path="/" exact component={Home} />
                 <Route path="/assets" component={Assets} />
                 <Route path="/cash" component={Cash} />
                 <Route path="/miner" component={Miner} />
