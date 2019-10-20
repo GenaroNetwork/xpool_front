@@ -70,6 +70,7 @@ class ApplyForMining extends React.Component {
         const token = localStorage.getItem('xpool-token');
         Api.userLoanMiningBalance(token).then(res => {
             if (res.data.code===200) {
+                this.props.dataInit()
                 this.setState({
                     loanMiningBalance: res.data.data.Deposit
                 })
