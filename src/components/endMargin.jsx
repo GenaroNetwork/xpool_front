@@ -51,6 +51,7 @@ class EndMargin extends React.Component {
             }
             this.getDepositBalance();
             this.UserLoanMiningBalance();
+            this.props.dataInit()
         })
     }
 
