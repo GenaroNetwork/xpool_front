@@ -66,6 +66,7 @@ class Main extends Component {
           this.setState({
             defaultRole: res.data.data.role
           })
+          localStorage.setItem('xpool-mining',res.data.data.mining);
       }
     })
   }

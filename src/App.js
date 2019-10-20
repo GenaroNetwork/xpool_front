@@ -43,6 +43,7 @@ class App extends Component {
             this.setState({
               email: res.data.data.email
             })
+            localStorage.setItem('xpool-mining',res.data.data.mining);
             break;
           default:
             this.setState({
@@ -50,6 +51,7 @@ class App extends Component {
               logined:false
             });
             localStorage.setItem('xpool-token',null);
+            localStorage.setItem('xpool-mining',null);
             break;
         }
       })

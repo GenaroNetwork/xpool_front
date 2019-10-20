@@ -34,11 +34,11 @@ class quickList extends React.Component {
 
     getDepositlist = (page, pageSize) => {
         const token = localStorage.getItem('xpool-token');
-        Api.getQuickList("0x5b3fd5ac978edeaca6428a029d783b57e634ddcb", page*pageSize, pageSize).then(res => {
+        Api.getQuickList(localStorage.getItem('xpool-mining'), page*5, pageSize).then(res => {
             console.log(res.data)
             this.setState(preState => ({
                 getdepositlist: Object.assign({}, preState.data, {
-                    page: res.data.meta.offset,
+                    page: res.data.meta.offset/5,
                     pageSize: res.data.meta.limit,
                     total: res.data.meta.total,
                     data: res.data.data
