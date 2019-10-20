@@ -57,6 +57,7 @@ class IncreaseMargin extends React.Component {
                 this.setState({
                     depositBalance: res.data.data
                 })
+                this.props.dataInit()
             }
         })
     }
