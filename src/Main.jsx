@@ -8,6 +8,7 @@ import ReviewCash from './components/ReviewCash';
 import ReviewMiner from './components/ReviewMiner';
 import ReviewIncome from './components/reviewincome';
 import Home from './components/Home';
+import * as Api from "./apis";
 
 
 const { Sider, Content, Footer } = Layout;
@@ -16,9 +17,11 @@ class Main extends Component {
   constructor(prpos) {
     super(prpos);
     this.state = {
-      defaultSelectedKeys: ['1']
+      defaultSelectedKeys: ['1'],
+      defaultRole:0
     };
   }
+
 
   componentWillMount() {
     switch (this.props.location.pathname) {
@@ -55,6 +58,16 @@ class Main extends Component {
       default:
         break;
     }
+
+    const token = localStorage.getItem('xpool-token');
+    Api.getUserInfo(token).then(res => {
+      switch (res.data.code) {
+        case 200:
+          this.setState({
+            defaultRole: res.data.data.role
+          })
+      }
+    })
   }
 
   handlerMenuClick({ key }) {
@@ -90,43 +103,43 @@ class Main extends Component {
     return (
       <div>
         <Layout>
-          {/*<Sider theme="light">*/}
-              {/*<Menu*/}
-              {/*style={{ minHeight: 600 }}*/}
-              {/*defaultSelectedKeys={this.state.defaultSelectedKeys}*/}
-              {/*mode="inline"*/}
-              {/*onClick={this.handlerMenuClick.bind(this)}*/}
-            {/*>*/}
+          {this.state.defaultRole == 1 ? <Sider theme="light">
+            <Menu
+                style={{ minHeight: 600 }}
+                defaultSelectedKeys={this.state.defaultSelectedKeys}
+                mode="inline"
+                onClick={this.handlerMenuClick.bind(this)}
+            >
               {/*<Menu.Item key="1">*/}
-                {/*<Icon type="pay-circle" />*/}
-                {/*我的资产*/}
+              {/*<Icon type="pay-circle" />*/}
+              {/*我的资产*/}
               {/*</Menu.Item>*/}
               {/*<Menu.Item key="2">*/}
-                {/*<Icon type="gold" />*/}
-                {/*保证金管理*/}
+              {/*<Icon type="gold" />*/}
+              {/*保证金管理*/}
               {/*</Menu.Item>*/}
               {/*<Menu.Item key="3">*/}
-                {/*<Icon type="file-sync" />*/}
-                {/*申请挖矿*/}
+              {/*<Icon type="file-sync" />*/}
+              {/*申请挖矿*/}
               {/*</Menu.Item>*/}
-              {/*<Menu.Item key="4">*/}
-                {/*<Icon type="gold" />*/}
-                {/*审核保证金*/}
-              {/*</Menu.Item>*/}
-              {/*<Menu.Item key="5">*/}
-                {/*<Icon type="file-sync" />*/}
-                {/*审核挖矿*/}
-              {/*</Menu.Item>*/}
-              {/*<Menu.Item key="6">*/}
-                {/*<Icon type="file-sync" />*/}
-                {/*审核收益*/}
-              {/*</Menu.Item>*/}
-              {/*<Menu.Item key="7">*/}
-                {/*<Icon type="file-sync" />*/}
-                {/*首页*/}
-              {/*</Menu.Item>*/}
-            {/*</Menu>*/}
-          {/*</Sider>*/}
+              <Menu.Item key="7">
+                <Icon type="file-sync" />
+                首页
+              </Menu.Item>
+              <Menu.Item key="4">
+                <Icon type="gold" />
+                审核保证金
+              </Menu.Item>
+              <Menu.Item key="5">
+                <Icon type="file-sync" />
+                审核挖矿
+              </Menu.Item>
+              <Menu.Item key="6">
+                <Icon type="file-sync" />
+                审核收益
+              </Menu.Item>
+            </Menu>
+          </Sider>:""}
           <Layout>
             <Content>
               <Switch>
